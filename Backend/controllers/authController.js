@@ -41,4 +41,5 @@ module.exports = {
     .json({status:"success",message:"login successfull",data:token})
 
      },
+     
 };

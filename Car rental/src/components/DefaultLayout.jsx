@@ -31,7 +31,7 @@ function DefaultLayout() {
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={() =>navigate("/Login") }>Sign in</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#action6" >
+            <Nav.Link onClick={() =>navigate("/cars") } >
               Cars
             </Nav.Link>
           </Nav>

@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const car = require("../models/carSchema")
+const car = require("../models/carSchema");
+
 require("dotenv").config();
+
+
 module.exports = {
   loginAdmin: async (req, res) => {
     const { username, password } = req.body;
@@ -25,22 +28,36 @@ module.exports = {
       });
     }
   },
-  createCars: async (req, res) => {
-    const { title, description, price, image, model } = req.body;
 
-    const cars = await car.create({
-      title,
-      description,
-      price,
-      image,
-      model,
-    });
-    if (!cars) {
-      return res.status(404).json({ error: "cars not created" });
-    }
-    res.status(201).json({
-      status: "success",
-      message: "successfully created car",
-    });
+  createCars: async (req, res) => {
+  
+        const { title, description, price, image, model } = req.body;
+  
+        const cars = await car.create({
+          title,
+          description,
+          price,
+          image,
+          model,
+        });
+  
+        if (!cars) {
+          return res.status(404).json({ error: "Car not created" });
+        }
+  
+        res.status(201).json({
+          status: "success",
+          message: "Successfully created car",
+        });
+   
   },
+
+  getAllCars: async (req, res) => {
+    const allcars = await car.find();
+    res.status(200).json({
+      status: "success",
+      message: "successfully fetched",
+      data: allcars,
+    });
+  }
 };

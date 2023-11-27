@@ -161,6 +161,8 @@ h1 {
   align-items: center;
   padding-right: 30%;
   padding-top: 5%;
+  height: 500px;
+  background-color:  #9affdb;;
 }
 .car {
   margin-top: 20px;
@@ -215,15 +217,17 @@ h1 {
 }
 
 .navii {
-  padding-top: 100px;
+  padding-top: 70px;
   display: flex;
   justify-content: center;
+  padding-right: 65%;
 }
 .navull {
   flex-basis: 50%;
-  margin-right: 200px;
-  background-color: black;
+  margin-right: 350px;
+  background-color: goldenrod;
   padding: 10px;
+  
 }
 .navul {
 
@@ -231,4 +235,94 @@ h1 {
   padding-right: 100px;
   display: flex;
   gap: 50px;
+}
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid red;
+  border-radius: 15px;
+  justify-content: space-around;
+}
+
+.map{
+  height: 500px;
+  width: 600px;
+  background-color: #ccc;
+  box-shadow: #090101;
+  
+
+}
+.address{
+  height: 500px;
+  width: 600px;
+  background-color: #8c7474;
+  border: 2px solid #090101;
+  border-radius: 15px;
+  box-shadow: #090101;
+}
+.footer{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 60px;
+  border: 1px solid red;
+}
+.kerala{
+  position: relative;
+  bottom: 35px;
+}
+.love{
+  position: relative;
+  bottom: 110px;
+}
+.footer h4 {
+  cursor: pointer;
+} 
+.social{
+  display: flex;
+  justify-content: space-between; 
+}
+.pickup {
+  position: relative;
+  width: 70vh;
+  background: linear-gradient(90deg, black 30%, gray 70%);
+  border-radius: 2px;
+  overflow: hidden;
+  color:white;
+ 
+}
+.timeperiod{
+  position: relative;
+  width: 70vh;
+  background: linear-gradient(90deg, red 30%, white 70%);
+  border-radius: 2px;
+  overflow: hidden;
+  color: #090101;
+  
+}
+.pickupmain{
+  padding-left: 3%;
+  padding-top: 3%;
+  
+}
+.newnav{
+  padding-left: 60%;
+  padding-bottom: 50%;
+  position: relative;
+  width: 20%;
+ 
+}
+.mainnav{
+  display: flex;
+}
+.allcars{
+  padding-top: 3%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: space-between;
 }

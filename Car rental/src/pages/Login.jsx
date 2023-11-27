@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DefaultLayout from "../components/DefaultLayout";
+
 
 const defaultTheme = createTheme();
 
@@ -56,7 +56,6 @@ export default function Login() {
 
   return (
     <div>
-      <header className='sticky-top'><DefaultLayout/></header>
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />

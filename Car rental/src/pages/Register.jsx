@@ -56,7 +56,6 @@ export default function Register() {
 
   return (
     <div>
-      <header className='sticky-top'><DefaultLayout/></header>
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />

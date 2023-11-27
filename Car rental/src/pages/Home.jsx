@@ -6,6 +6,10 @@ import Featured from './Featured'
 import MediaCover from './Video'
 import Vintage from './Vintage'
 import Whywor from './Whywor'
+import Map from './Map'
+import Footer from './Footer'
+import Socialmedia from './Socialmedia'
+
 
 
 function Home() {
@@ -14,13 +18,15 @@ function Home() {
 
   return (
     <>
-    <DefaultLayout/><MediaCover/>
+  <MediaCover/>
       <CarRentalForm/>
       <Discount/>
       <Featured/>
       <Vintage/>
+      <Map/>
       <Whywor/>
-      
+      <Footer/>
+      <Socialmedia/>
 
       
       

@@ -8,11 +8,13 @@ const tryCatchMiddleware = require('../middleware/tryCatchMiddleware');
 
 const verifyToken = require('../middleware/adminAuthMiddleware')
 
+const upload = require('../middleware/photoUpload')
+
 adminRouter.use(express.json())
 
-adminRouter.post('/login',tryCatchMiddleware(adminController.loginAdmin))
-adminRouter.post('/cars',verifyToken,tryCatchMiddleware(adminController.createCars))
-
+adminRouter.post('/login',verifyToken,tryCatchMiddleware(adminController.loginAdmin))
+adminRouter.post('/cars',upload,tryCatchMiddleware(adminController.createCars))
+adminRouter.get('/cars',tryCatchMiddleware(adminController.getAllCars))
 
 
 

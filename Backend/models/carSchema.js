@@ -14,7 +14,6 @@ const carSchema = mongoose.Schema({
     },
     image:{
         type: String,
-        required: true
     },
     model:{
         type: String,
