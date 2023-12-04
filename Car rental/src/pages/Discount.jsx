@@ -21,7 +21,7 @@ function Discount() {
   <div className='image-container'>
     <img src='https://www.evmwheels.com/front-theme/images/special_offer_2.png' alt="Special Offer 2" />
     <span>
-      <h4>GET 15%OFF ON 3</h4>
+      <h4>GET 15%OFF ON 5</h4>
       <h4>DAYS BOOKING</h4>
     </span>
   </div>
