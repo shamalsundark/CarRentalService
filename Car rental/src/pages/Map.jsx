@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import lottie from 'lottie-web';
+import bmw from '../components/assests/Animation - 1701162028783.json';
 
 function Map() {
+  const [animationInstance, setAnimationInstance] = useState(null);
+
+  useEffect(() => {
+    // Load the Lottie animation
+    const animation = lottie.loadAnimation({
+      container: document.getElementById('lottie-container'), // ID of the container div
+      animationData: bmw, // Your animation data
+      loop: true, // Set to true if you want the animation to loop
+      renderer: 'svg', // Choose the renderer (svg, canvas)
+    });
+
+    setAnimationInstance(animation);
+
+    // Clean up on component unmount
+    return () => {
+      animation.destroy();
+    };
+  }, []); // Empty dependency array to run the effect only once on mount
+
   return (
     <div>
       <div className='wrapper'>
@@ -19,7 +40,10 @@ function Map() {
           </div>
         </div>
         <div className='address'>
-          <h3 style={{textAlign:"center"}}>CHAT BOX</h3>
+        <div style={{width:'500px',height:'80px'}} className='mx-auto max-w-screen-md'></div>
+
+          <div id="lottie-container"></div>
+          <h1 style={{color:'red',fontSize:'bold',marginBottom:'40px',textShadow:'inherit'}} className=''></h1>
         </div>
       </div>
     </div>

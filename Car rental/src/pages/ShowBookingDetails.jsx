@@ -1,16 +1,12 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import DefaultLayout from "../components/DefaultLayout";
 import Navbar from "./Navigationbar";
-import { Card } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
-
-function ShowBookingDetails({cars}) {
+function ShowBookingDetails() {
   const location = useLocation();
   const formData = location.state;
-  console.log(cars);
 
   const calculateTimeDifference = (startDate, endDate) => {
-    // Function to calculate the time difference between two dates
     const startDateTime = new Date(startDate).getTime();
     const endDateTime = new Date(endDate).getTime();
 
@@ -30,7 +26,7 @@ function ShowBookingDetails({cars}) {
 
   return (
     <header className="sticky-top">
-     
+       <header className='sticky-top'><DefaultLayout/></header>
       <div className="mainnav">
         <div className="pickupmain">
           <div>
@@ -55,33 +51,16 @@ function ShowBookingDetails({cars}) {
         </div>
         <div>
           <div className="newnav">
-            <Navbar/>
-            <Card>
-              {
-                cars?.map((car) => (
-                  <div key={car._id} style={{ marginBottom: '20px' }}>
-                    <Card style={{ width: '18rem' }}>
-                      <Card.Img variant="top" src={car.image} alt={car.title} />
-                      <Card.Body>
-                        <Card.Title>{car.title}</Card.Title>
-                        <Card.Text>{car.description}</Card.Text>
-                        <Card.Text>PRICE: ₹{car.price}</Card.Text>
-                        <Card.Text>Model: {car.model}</Card.Text>
-                        <Button variant="primary">....Go....</Button>
-                      </Card.Body>
-                    </Card>
-              
-                  </div>
-                ))
-              }
-            </Card>
-            
+            <Navbar />
+            <div>
+              <h1></h1>
+            </div>
           </div>
-        
         </div>
       </div>
     </header>
   );
 }
+
 
 export default ShowBookingDetails;

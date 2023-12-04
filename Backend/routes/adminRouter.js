@@ -15,6 +15,7 @@ adminRouter.use(express.json())
 adminRouter.post('/login',verifyToken,tryCatchMiddleware(adminController.loginAdmin))
 adminRouter.post('/cars',upload,tryCatchMiddleware(adminController.createCars))
 adminRouter.get('/cars',tryCatchMiddleware(adminController.getAllCars))
+adminRouter.get('/getuser',tryCatchMiddleware(adminController.getUser))
 
 
 

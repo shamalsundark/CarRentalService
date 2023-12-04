@@ -18,6 +18,18 @@ const carSchema = mongoose.Schema({
     model:{
         type: String,
         required: true
+    },
+    fuel:{
+        type:String,
+       
+    },
+    seat:{
+        type:Number,
+       
+    },
+    transmission:{
+        type:String,
+        
     }
 })
 module.exports = mongoose.model('Car',carSchema);

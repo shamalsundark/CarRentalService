@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import ShowBookingDetails from './ShowBookingDetails';
+import DefaultLayout from '../components/DefaultLayout';
+
 
 function CarList() {
   const [cars, setCars] = useState([]);
@@ -22,6 +23,7 @@ function CarList() {
 
   return (
     <div>
+       <header className='sticky-top'><DefaultLayout/></header>
       <div className='allcars'>
         {cars?.map((car) => (
           <div key={car._id} style={{ marginBottom: '20px' }}>
@@ -32,7 +34,7 @@ function CarList() {
                 <Card.Text>{car.description}</Card.Text>
                 <Card.Text>PRICE: ₹{car.price}</Card.Text>
                 <Card.Text>Model: {car.model}</Card.Text>
-                <Button variant="primary">....Go....</Button>
+                <Button variant="primary">SELECT</Button>
               </Card.Body>
             </Card>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function CarRentalForm() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function CarRentalForm() {
     dropOffTime: '',
   });
 
+  
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,9 +22,35 @@ function CarRentalForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+
+  function getTomorrowDate() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+  
+    const year = tomorrow.getFullYear();
+    let month = tomorrow.getMonth() + 1; 
+    let day = tomorrow.getDate();
+  
+    
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+  
+    return `${year}-${month}-${day}`;
+  }
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/bookdetails",{formData}, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      })
+      console.log(response);
     navigate('/Bookingdetails', { state: formData });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -33,12 +62,15 @@ function CarRentalForm() {
             className="form-control"
             id="pickupLocation"
             name="pickupLocation"
-            // value={formData.pickupLocation}
+           
             onChange={handleChange}
           >
             <option>Kannur</option>
             <option >Kochi</option>
             <option>Trivandrum</option>
+            <option>Trissur</option>
+            <option>Palakkad</option>
+            <option>Wayanad</option>
           </select>
         </div>
 
@@ -48,25 +80,29 @@ function CarRentalForm() {
             className="form-control"
             id="dropOffLocation"
             name="dropOffLocation"
-            // value={formData.dropOffLocation}
+           
             onChange={handleChange}
           >
             <option>Trissur</option>
             <option>Palakkad</option>
             <option>Wayanad</option>
+            <option>Kannur</option>
+            <option >Kochi</option>
+            <option>Trivandrum</option>
           </select>
         </div>
 
         <div className="form-group">
           <label htmlFor="pickupDate">Select Pickup Date</label>
           <input
-            type="date"
-            className="form-control"
-            id="pickupDate"
-            name="pickupDate"
-            value={formData.pickupDate}
-            onChange={handleChange}
-          />
+  type="date"
+  className="form-control"
+  id="pickupDate"
+  name="pickupDate"
+  value={formData.pickupDate}
+  onChange={handleChange}
+  min={getTomorrowDate()} 
+/>
         </div>
 
         <div className="form-group">
@@ -76,6 +112,7 @@ function CarRentalForm() {
             className="form-control"
             id="pickupTime"
             name="pickupTime"
+            
             value={formData.pickupTime}
             onChange={handleChange}
           />
@@ -90,6 +127,7 @@ function CarRentalForm() {
             name="dropOffDate"
             value={formData.dropOffDate}
             onChange={handleChange}
+            min={getTomorrowDate()}
           />
         </div>
 

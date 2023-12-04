@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const car = require("../models/carSchema");
+const userSchema = require("../models/userSchema")
 
 require("dotenv").config();
 
@@ -31,7 +32,7 @@ module.exports = {
 
   createCars: async (req, res) => {
   
-        const { title, description, price, image, model } = req.body;
+        const { title, description, price, image, model,seat,fuel,transmission } = req.body;
   
         const cars = await car.create({
           title,
@@ -39,6 +40,9 @@ module.exports = {
           price,
           image,
           model,
+          seat,
+          fuel,
+          transmission
         });
   
         if (!cars) {
@@ -59,5 +63,31 @@ module.exports = {
       message: "successfully fetched",
       data: allcars,
     });
-  }
+  },
+
+viewCarById: async(req,res)=>{
+  const carId = req.params.id;
+  const car = await car.findById(carId);
+  if(!car){
+    return res.status(404).json({error:"car not found"});
+  }  
+  res.status(200).json({
+    status: "success",
+    message:"successfully fetched car",
+  })
+},
+
+deleteCar:async (req,res)=>{
+  const {id} = req.body;
+  await car.findByIdAndDelete(id);
+  res.status(200).json({
+    status: "success",
+    message:"successfully deleted car",
+  });
+},
+getUser:async(req,res)=>{
+  const users = await userSchema.find()
+  res.json(users);
+}
+
 };

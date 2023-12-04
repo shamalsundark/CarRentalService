@@ -3,9 +3,11 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import DefaultLayout from '../components/DefaultLayout';
-
+import { useNavigate } from 'react-router-dom';
 function Sedan() {
   const [cars, setCars] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getAllCars() {
@@ -20,6 +22,11 @@ function Sedan() {
     getAllCars();
   }, []);
 
+  const handleCarClick =(id)=>{
+    console.log(id);
+    navigate(`/details/${id}`)
+  }
+
  
   const filterSedanCars = () => {
     return cars.filter((car) => car.model === 'sedan');
@@ -29,6 +36,7 @@ function Sedan() {
 
   return (
     <div>
+       <header className='sticky-top'><DefaultLayout/></header>
       <div className='allcars'>
         {sedanCars.map((car) => (
           <Card key={car._id} style={{ width: '18rem', marginBottom: '20px' }}>
@@ -36,9 +44,11 @@ function Sedan() {
             <Card.Body>
               <Card.Title>{car.title}</Card.Title>
               <Card.Text>{car.description}</Card.Text>
-              <Card.Text>PRICE: ₹{car.price}</Card.Text>
+              <Card.Text>PRICE(perday): ₹{car.price}</Card.Text>
               <Card.Text>Model: {car.model}</Card.Text>
-              <Button variant="primary">....Go....</Button>
+              <Button variant="primary"
+              onClick={()=>handleCarClick(car?._id)}
+              >CLICK</Button>
             </Card.Body>
           </Card>
         ))}

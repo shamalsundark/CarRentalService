@@ -17,7 +17,10 @@ function Home() {
 
 
   return (
-    <>
+    <div >
+    <div className='sticky-top'>
+    <DefaultLayout /> 
+    </div>
   <MediaCover/>
       <CarRentalForm/>
       <Discount/>
@@ -30,7 +33,7 @@ function Home() {
 
       
       
-      </>
+     </div>
   )
 }
 

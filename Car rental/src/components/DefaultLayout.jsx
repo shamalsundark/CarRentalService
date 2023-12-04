@@ -15,7 +15,7 @@ function DefaultLayout() {
 
     <Navbar expand="lg" className="bg-warning" >
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand onClick={() =>navigate("/") }>
           <img src={logo} alt="Logo" width="120" height="50" style={{paddingTop:10}} /> 
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -23,7 +23,7 @@ function DefaultLayout() {
           <Nav
             className="me-auto"
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link onClick={() =>navigate("/") }>Home</Nav.Link>
             <Nav.Link href="#action2">Deals</Nav.Link>
             <NavDropdown title="Sign/Registration" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3"></NavDropdown.Item>

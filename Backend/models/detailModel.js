@@ -1,0 +1,34 @@
+const mongoose = require('mongoose')
+
+const detailSchema = new mongoose.Schema({
+    userName:{
+        type:String,
+        // required:true,
+    },
+    pickupLocation: {
+        type: String,
+        required: true
+    },
+    pickupDate: {
+        type: Date,
+        required: true
+    },
+    pickupTime: {
+        type: String,
+        required: true
+    },
+    dropOffLocation:{
+        type: String,
+        required: true
+    },
+    dropOffDate: {
+        type: Date,
+        required: true
+    },
+    dropOffTime: {
+        type: String,
+        required: true
+    }
+})
+ 
+module.exports = mongoose.model('Details', detailSchema)
