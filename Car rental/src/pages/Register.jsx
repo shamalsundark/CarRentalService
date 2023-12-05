@@ -11,6 +11,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../components/DefaultLayout";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const defaultTheme = createTheme();
 
@@ -47,10 +50,12 @@ export default function Register() {
       setLoading(false);
       setError(null);
       navigate('/login');
-      alert(data.message);
+      toast.success(data.message);
+
     } catch (error) {
       setLoading(false);
       setError(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -89,7 +94,7 @@ export default function Register() {
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign Up
             </Typography>
             <Box
               component="form"

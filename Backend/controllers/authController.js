@@ -48,7 +48,7 @@ module.exports = {
       password === process.env.ADMIN_PASSWORD
     ) {
       const token = jwt.sign(
-        { id: user._id, email: email },
+        { email: email },
         process.env.USER_ACCESS_TOKEN_SECRET
       );
       return res.status(200).json({

@@ -17,6 +17,7 @@ import AdminHome from './pages/AdminHome'
 import CarDetails from './pages/CarDetails'
 import Userlist from './pages/Userlist'
 import AdminDash from './pages/AdminDash'
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <div>
+         <ToastContainer />
    <BrowserRouter>
       
    <Routes>

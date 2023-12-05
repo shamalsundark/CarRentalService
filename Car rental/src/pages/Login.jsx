@@ -12,6 +12,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import DefaultLayout from "../components/DefaultLayout";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const defaultTheme = createTheme();
 
@@ -40,13 +44,13 @@ export default function Login() {
         setError(null);
         navigate("/");
      
-        alert(data.message);
+        toast.success(data.message);
       } else if (data.status === "adminsuccess") {
         setLoading(false);
         setError(null);
         navigate("/adminhome");
+        toast.success(data.message);
 
-        alert(data.message);
       } else {
         setLoading(false);
         setError(data.message);
@@ -54,6 +58,7 @@ export default function Login() {
     } catch (error) {
       setLoading(false);
       setError(error.message);
+      toast.error(error.message);
     }
   };
 
