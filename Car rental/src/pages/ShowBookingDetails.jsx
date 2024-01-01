@@ -1,66 +1,74 @@
+import { useSelector } from "react-redux";
 import DefaultLayout from "../components/DefaultLayout";
+import Footer from "./Footer";
 import Navbar from "./Navigationbar";
-import { useLocation } from "react-router-dom";
+
 
 function ShowBookingDetails() {
-  const location = useLocation();
-  const formData = location.state;
-
-  const calculateTimeDifference = (startDate, endDate) => {
-    const startDateTime = new Date(startDate).getTime();
-    const endDateTime = new Date(endDate).getTime();
-
-    const timeDifference = endDateTime - startDateTime;
-
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-
-    return `${days} days, ${hours} hours, and ${minutes} minutes`;
-  };
-
-  const timeDifference = calculateTimeDifference(
-    `${formData.pickupDate}T${formData.pickupTime}`,
-    `${formData.dropOffDate}T${formData.dropOffTime}`
-  );
-
+ ;
+  const { currentBooking } = useSelector((state) => state.booking);
+  console.log(currentBooking);
   return (
     <header className="sticky-top">
-       <header className='sticky-top'><DefaultLayout/></header>
-      <div className="mainnav">
-        <div className="pickupmain">
-          <div>
-            <div>
-              <div className="pickup" style={{ width: '300px', padding: '20px', marginBottom: '20px' }}>
-                <p><strong>Pickup Location:</strong> {formData.pickupLocation}</p>
-                <p><strong>Drop Off Location:</strong> {formData.dropOffLocation}</p>
-              </div>
-              <div className="pickup" style={{ width: '300px', padding: '20px', marginBottom: '20px' }}>
-                <p><strong>Pickup Date:</strong> {formData.pickupDate}</p>
-                <p><strong>Pickup Time:</strong> {formData.pickupTime}</p>
-              </div>
-              <div className="pickup" style={{ width: '300px', padding: '20px', marginBottom: '20px' }}>
-                <p><strong>Drop Off Date:</strong> {formData.dropOffDate}</p>
-                <p><strong>Drop Off Time:</strong> {formData.dropOffTime}</p>
-              </div>
-              <div className="timeperiod" style={{ width: '300px', padding: '20px', marginBottom: '20px' }}>
-                <p><strong>Time Period Difference:</strong> {timeDifference}</p>
-              </div>
+      <header className="sticky-top">
+        <DefaultLayout />
+      </header>
+      <div>
+        <div className="mainnav">
+          <div style={{position:'relative',top:'100px',height:'100px'}}>
+            <div
+              className="pickup"
+              style={{ width: "300px", padding: "20px", marginBottom: "20px" }}
+            >
+              <p>
+                <strong>Pickup Location:</strong> {currentBooking?.detailsAdd?.pickupLocation}
+              </p>
+              <p>
+                <strong>Drop Off Location:</strong> {currentBooking?.detailsAdd?.dropOffLocation}
+              </p>
+            </div>
+            <div
+              className="pickup"
+              style={{ width: "300px", padding: "20px", marginBottom: "20px" }}
+            >
+              <p>
+                <strong>Pickup Date:</strong> {currentBooking?.detailsAdd?.pickupDate}
+              </p>
+              <p>
+                <strong>Pickup Time:</strong> {currentBooking?.detailsAdd?.pickupTime}
+              </p>
+            </div>
+            <div
+              className="pickup"
+              style={{ width: "300px", padding: "20px", marginBottom: "20px" }}
+            >
+              <p>
+                <strong>Drop Off Date:</strong> {currentBooking?.detailsAdd?.dropOffDate}
+              </p>
+              <p>
+                <strong>Drop Off Time:</strong> {currentBooking?.detailsAdd?.dropOffTime}
+              </p>
             </div>
           </div>
-        </div>
-        <div>
+
           <div className="newnav">
-            <Navbar />
-            <div>
-              <h1></h1>
+              <Navbar />
+            <div className="pickupmain">
+              <img
+                style={{ position: "relative", left: "30px",bottom:"12px", width: "1000px",height:"500px" }}
+                src="https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="benz"
+              />
             </div>
           </div>
+
+
+
         </div>
+        <Footer/>
       </div>
     </header>
   );
 }
-
 
 export default ShowBookingDetails;

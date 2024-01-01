@@ -1,48 +1,197 @@
-import React from 'react';
-import logo from '../components/assests/logo.png';
-import { Bar } from 'react-chartjs-2';
-import 'chart.js/auto';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import { PieChart } from "@mui/x-charts/PieChart";
+import { BarChart } from "@mui/x-charts/BarChart";
 
-function AdminDash() {
-  // Example data for the bar chart
-  const chartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','July','Augast','September','October','November'],
-    datasets: [
-      {
-        label: 'Number Of Car Rents',
-        data: [65, 59, 80, 81, 56, 55, 40 ,50 ,30 ,55 ,60],
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderWidth: 1,
-      }, 
-    ],
-  };
+const BasicCard = () => {
+  const [userList, setUserList] = useState([]);
+  const [carList, setCarList] = useState([]);
 
-  // Chart options with scales configuration
-  const chartOptions = {
-    scales: {
-      x: {
-        type: 'category', // Ensure 'category' scale is used for the x-axis
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','Augast','September','October','November'],
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/admin/getuser"
+        );
+        setUserList(response.data);
+      } catch (error) {
+        console.error("Error fetching user list:", error);
+      }
+    }
+
+    fetchUsers();
+  }, []);
+
+  const totalUsers = userList.length;
+
+  useEffect(() => {
+    async function fetchCars() {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/admin/cars"
+        );
+        setCarList(response.data.data);
+      } catch (error) {
+        console.error("Error fetching user list:", error);
+      }
+    }
+
+    fetchCars();
+  }, []);
+  const totalCars = carList.length;
+
+  const sedanCars = carList.filter((car) => car.model === "sedan");
+  const suvCars = carList.filter((car) => car.model === "suv");
+  const muvCars = carList.filter((car) => car.model === "muv");
+  const luxuryCars = carList.filter((car) => car.model === "luxury");
 
   return (
     <div>
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <img src={logo} alt="Logo" width="500" height="120" style={{ paddingTop: 10 }} />
-      </div>
-      <div>
-        <h2>Graphical Representation</h2>
-        {/* Include the Bar chart with options */}
-        <Bar data={chartData} options={chartOptions} width={300} height={90} />
-      </div>
-    </div>
-  );
-}
+      <BarChart
+        xAxis={[
+          {
+            scaleType: "band",
+            data: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+          },
+        ]}
+        series={[
+          { data: [4, 3, 5, 2, 4, 6, 3, 5, 7, 8, 9, 5] },
+          { data: [1, 6, 3, 5, 2, 4, 6, 3, 1, 2, 3, 4] },
+          { data: [2, 5, 6, 4, 3, 2, 1, 5, 8, 9, 6, 7] },
+          { data: [2, 5, 6, 4, 3, 2, 1, 5, 2, 5, 8, 6] },
+        ]}
+        width={1200}
+        height={300}
+      />
 
-export default AdminDash;
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <Card
+            sx={{
+              minWidth: 200,
+              marginTop: 10,
+              width: 45,
+              backgroundColor: "white",
+            }}
+          >
+            <CardContent>
+              <Typography sx={{ mb: 1.5 }} color="#37474F">
+                NO.OF.CUSTOMERS:{totalUsers}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+        <div style={{ marginTop: 55, border: "1px solid #ccc", borderRadius: "8px", padding: "10px" }}>
+  <PieChart
+    series={[
+      {
+        data: [
+          { id: 0, value: 4, label: "SEDAN" },
+          { id: 1, value: 5, label: "SUV" },
+          { id: 2, value: 5, label: "MUV" },
+          { id: 3, value: 5, label: "LUXURY" },
+        ],
+      },
+    ]}
+    width={400}
+    height={200}
+  />
+</div>
+
+        <div>
+          <Card
+            sx={{
+              minWidth: 200,
+              marginTop: 10,
+              width: 45,
+              backgroundColor: "white",
+            }}
+          >
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="black"
+                gutterBottom
+              >
+                NUMBER OF CARS:{totalCars}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="red">
+                NO.OF.SEDAN: {sedanCars.length}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="blue">
+                NO.OF.MUV: {muvCars.length}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="green">
+                NO.OF.SUV:{suvCars.length}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="brown">
+                NO.OF.LUXURY:{luxuryCars.length}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      
+      <div>
+  <h5
+    style={{
+      textAlign: "center",
+      fontWeight: "bold",
+      paddingTop: "50px",
+    }}
+  >
+    AVAILABLE OFFERS FOR CUSTOMERS
+  </h5>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-around",
+      paddingTop: "1rem",
+    }}
+  >
+    <div style={{ borderBottom: "1px solid black", borderTop: "1px solid black" }}>
+      <h2 style={{ color: "#02B2AF" }}>FIRST RIDE</h2>
+      <h4 style={{ color: "#2E96FF" }}>Get Up 50% Off</h4>
+      <h5 style={{color: "#60009B" }}>Your 1st Booking</h5>
+      <h5>CODE:FSTR666</h5>
+    </div>
+    <div style={{ borderBottom: "1px solid black", borderTop: "1px solid black" }}>
+      <span>
+        <h2 style={{ color: "#2E96FF" }}>GET 15%OFF ON 5</h2>
+        <h4 style={{ color: "#02B2AF" }}>DAYS BOOKING</h4>
+        <h5 style={{color: "#60009B" }}>CODE:HAADV666</h5>
+      </span>
+    </div>
+    <div style={{ borderBottom: "1px solid black", borderTop: "1px solid black" }}>
+      <span>
+        <h2 style={{ color: "#2E96FF" }}>WEEKEND SPECIAL</h2>
+        <h4  style={{ color: "#02B2AF" }}>GET 5% OFF</h4>
+        <h4   style={{color: "#60009B" }}>DAYS BOOKING</h4>
+        <h5>CODE:WKND666</h5>
+      </span>
+    </div>
+  </div>
+</div>
+</div>
+   
+  );
+};
+
+export default BasicCard;

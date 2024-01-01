@@ -4,9 +4,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import DefaultLayout from '../components/DefaultLayout';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+
 function Muv() {
   const [cars, setCars] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getAllCars() {
@@ -21,37 +23,44 @@ function Muv() {
     getAllCars();
   }, []);
 
- 
-  const filterSedanCars = () => {
+  const filterMuvCars = () => {
     return cars.filter((car) => car.model === 'muv');
   };
 
-  const handleCarClick =(id)=>{
+  const handleCarClick = (id) => {
     console.log(id);
-    navigate(`/details/${id}`)
-  }
+    navigate(`/details/${id}`);
+  };
 
-  const sedanCars = filterSedanCars();
+  const muvCars = filterMuvCars();
 
   return (
     <div>
-       <header className='sticky-top'><DefaultLayout/></header>
+      <header className='sticky-top'><DefaultLayout /></header>
       <div className='allcars'>
-        {sedanCars.map((car) => (
+        {muvCars.map((car) => (
           <Card key={car._id} style={{ width: '18rem', marginBottom: '20px' }}>
             <Card.Img variant="top" src={car.image} alt={car.title} />
             <Card.Body>
-              <Card.Title>{car.title}</Card.Title>
+              <Card.Title style={{ color: 'darkblue' }}>{car.title}</Card.Title>
               <Card.Text>{car.description}</Card.Text>
-              <Card.Text>PRICE(perday): ₹{car.price}</Card.Text>
+              <Card.Text>
+                PRICE: ₹{car.price}{' '}
+                <span style={{ color: 'red' }}>ONWARDS</span>
+              </Card.Text>
               <Card.Text>Model: {car.model}</Card.Text>
-              <Button
-                            onClick={()=>handleCarClick(car?._id)}
-
-              variant="primary">CLICK</Button>
+              <Button className='sedanbtn'
+                onClick={() => handleCarClick(car?._id)}
+                variant="primary"
+              >
+                CLICK
+              </Button>
             </Card.Body>
           </Card>
         ))}
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );

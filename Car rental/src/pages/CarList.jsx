@@ -3,6 +3,7 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import DefaultLayout from '../components/DefaultLayout';
+import Footer from './Footer';
 
 
 function CarList() {
@@ -34,11 +35,13 @@ function CarList() {
                 <Card.Text>{car.description}</Card.Text>
                 <Card.Text>PRICE: ₹{car.price}</Card.Text>
                 <Card.Text>Model: {car.model}</Card.Text>
-                <Button variant="primary">SELECT</Button>
               </Card.Body>
             </Card>
           </div>
         ))}
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );

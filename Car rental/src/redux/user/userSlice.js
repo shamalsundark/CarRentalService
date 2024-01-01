@@ -1,16 +1,30 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const userSlicer = createSlice({
-  name: 'user',
-  initialState: {
-    loading: false,
-  },
-  reducers: {
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
-  },
-});
+const initialState={
+    currentUser:null,
+    error:null,
+    loading:false,
+}
 
-export const { setLoading } = userSlicer.actions;
-export default userSlicer.reducer;
+const userSlice = createSlice({
+    name:"user",
+    initialState,
+    reducers:{
+        signInStart:(state)=>{
+            state.loading = true;
+        },
+        siginSuccess:(state,action)=>{
+            state.currentUser=action.payload
+            state.loading=false;
+            state.error=null;
+        },
+        signInFailure:(state,action)=>{
+            state.loading = false;
+            state.error=action.payload
+        }
+    }
+})
+
+export const {signInStart,siginSuccess,siginFailure}=userSlice.actions
+
+export default userSlice.reducer;

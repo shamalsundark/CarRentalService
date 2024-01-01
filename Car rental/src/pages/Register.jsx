@@ -21,6 +21,8 @@ export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  // const [userName,setUsername] = useState()
+  console.log(formData,'form');
   const navigate=useNavigate();
   const handleChange = (e) => {
     setFormData({
@@ -40,17 +42,21 @@ export default function Register() {
         },
         body: JSON.stringify(formData),
       });
+      console.log("");
       const data = await res.json();
       console.log(data);
-      if (data.success === false) {
+      if (data.success === true) {
+
         setLoading(false);
-        setError(data.message);
-        return;
+        setError(null);
+        navigate(`/otp/${formData.email}`);
+       
       }
-      setLoading(false);
-      setError(null);
-      navigate('/login');
       toast.success(data.message);
+      setLoading(false);
+      setError(data.message);
+      return;
+     
 
     } catch (error) {
       setLoading(false);
@@ -58,6 +64,8 @@ export default function Register() {
       toast.error(error.message);
     }
   };
+
+ 
 
   return (
     <div>
@@ -168,8 +176,8 @@ export default function Register() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="/login" variant="body2">
+                    {"Already have an account? Sign in"}
                   </Link>
                 </Grid>
               </Grid>

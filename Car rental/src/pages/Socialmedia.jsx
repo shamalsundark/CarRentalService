@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import '@fortawesome/fontawesome-free/css/all.css'; 
 
 const Socialmedia = () => {
   return (
@@ -12,15 +13,16 @@ const Socialmedia = () => {
       <div>
         <h4 style={{ fontSize: '12px' }}>DATA&SEQUIRITY</h4>
       </div>
-      <div>
-        <h4>
-        <i className="fab fa-facebook"></i>
-        <i className="fab fa-twitter"></i>
-        <i className="fab fa-instagram"></i>
-        </h4>
-      </div>
-    </div>
-  )
-}
+      <div className='icons'>
+  <h5>
+    <i className="fab fa-facebook" style={{ marginRight: '10px' }}></i>
+    <i className="fab fa-twitter" style={{ marginRight: '10px' }}></i>
+    <i className="fab fa-instagram"></i>
+  </h5>
+</div>
 
-export default Socialmedia
+    </div>
+  );
+};
+
+export default Socialmedia;

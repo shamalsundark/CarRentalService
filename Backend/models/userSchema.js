@@ -13,6 +13,23 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true,
+    },
+    otp:{
+        type:Number,
+        required: false,
+    },
+    isBlock:{
+        type: Number,
+        required: false,  
+
+    },
+    isVerified:{
+        type :Boolean,
+        default:false
+    },
+    token:{
+        type:String,
+        default:''
     }
 })
 userSchema.pre('save',async function(next){

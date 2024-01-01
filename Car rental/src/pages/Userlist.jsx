@@ -8,6 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Paginationn from './Pagination';
+
+const ITEMS_PER_PAGE = 5;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,8 +31,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const StyledButton = styled('button')(() => ({
+  backgroundColor: "orange",
+  color: "black",
+  borderRadius: '15px', 
+  padding: '10px 16px', 
+  cursor: 'pointer',
+  zIndex: 4, 
+}));
+
 export default function CustomizedTables() {
   const [userList, setUserList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastPage = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstPage = indexOfLastPage - ITEMS_PER_PAGE;
+  const currentList = userList.slice(indexOfFirstPage, indexOfLastPage);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -44,6 +61,16 @@ export default function CustomizedTables() {
     fetchUsers();
   }, []);
 
+  const handleBlockClick = (userId) => {
+    // Add logic to handle blocking the user with the given userId
+    console.log(`Block user with ID: ${userId}`);
+  };
+
+  const handleViewClick = (userId) => {
+    // Add logic to handle viewing details of the user with the given userId
+    console.log(`View details of user with ID: ${userId}`);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -52,20 +79,31 @@ export default function CustomizedTables() {
             <StyledTableCell>CUSTOMER NAME</StyledTableCell>
             <StyledTableCell align="right">EMAIL</StyledTableCell>
             <StyledTableCell align="right">ID</StyledTableCell>
+            <StyledTableCell align="right">ACTIONS</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {userList.map((user, index) => (
+          {currentList.map((user, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 {user.name}
               </StyledTableCell>
               <StyledTableCell align="right">{user.email}</StyledTableCell>
               <StyledTableCell align="right">{user._id}</StyledTableCell>
+              <StyledTableCell align="right">
+                <StyledButton onClick={() => handleBlockClick(user._id)}>Block</StyledButton>
+                <StyledButton onClick={() => handleViewClick(user._id)}>View</StyledButton>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
+      <Paginationn
+        itemsPerPage={ITEMS_PER_PAGE}
+        totalpages={userList.length}
+        paginate={setCurrentPage}
+        currentpage={currentPage}
+      />
     </TableContainer>
   );
 }

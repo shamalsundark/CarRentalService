@@ -16,6 +16,15 @@ adminRouter.post('/login',verifyToken,tryCatchMiddleware(adminController.loginAd
 adminRouter.post('/cars',upload,tryCatchMiddleware(adminController.createCars))
 adminRouter.get('/cars',tryCatchMiddleware(adminController.getAllCars))
 adminRouter.get('/getuser',tryCatchMiddleware(adminController.getUser))
+adminRouter.patch('/deletecar',tryCatchMiddleware(adminController.deleteCar))
+
+
+
+adminRouter.post('/editcar',tryCatchMiddleware(adminController.editCar))
+
+adminRouter.post('/editcardata',tryCatchMiddleware(adminController.editCarData))
+
+
 
 
 

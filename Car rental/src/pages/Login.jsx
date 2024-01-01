@@ -1,3 +1,4 @@
+import jwt_decode from "jwt-decode";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,19 +13,30 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import DefaultLayout from "../components/DefaultLayout";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import {
+  signInStart,
+  siginSuccess,
+  siginFailure,
+} from "../redux/user/userSlice";
 
+import { GoogleLogin } from "@react-oauth/google";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,39 +44,69 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const googleSign = async (name, email) => {
     try {
-      setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/auth/login",formData,);
-      const data = await res.data; 
-      console.log(data);
-      if (data.status === "usersuccess") {
-        setLoading(false);
-        setError(null);
-        navigate("/");
-     
-        toast.success(data.message);
-      } else if (data.status === "adminsuccess") {
-        setLoading(false);
-        setError(null);
-        navigate("/adminhome");
-        toast.success(data.message);
+      const formData = {
+        name,
+        email,
+      };
+      if (formData) {
+        const response = await axios.post(
+          "http://localhost:5000/api/auth/googlelogin",
+          formData
+        );
 
+        if (response.data.success) {
+          toast.success(response.data.message);
+          toast("Redirected to home page");
+          localStorage.setItem("token", response.data.data);
+          navigate("/");
+        } else {
+          toast.error(response.data.message);
+        }
       } else {
-        setLoading(false);
-        setError(data.message);
+        console.log("something went wrong");
       }
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch(signInStart());
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData
+      );
+      const data = await res.data;
+      console.log(data);
+      if (data.status === "usersuccess") {
+        dispatch(siginSuccess(data));
+        navigate("/");
+
+        toast.success(data.message);
+      } else if (data.status === "adminsuccess") {
+        navigate("/adminhome");
+        toast.success(data.message);
+      } 
+    } catch (error) {
+      dispatch(siginFailure(error.message));
       toast.error(error.message);
     }
   };
 
+  const handleForgotPasswordClick = () => {
+    navigate("/forgot");
+    console.log("Forgot Password clicked");
+  };
+
   return (
     <div>
-       <header className='sticky-top'><DefaultLayout/></header>
+      <header className="sticky-top">
+        <DefaultLayout />
+      </header>
       <ThemeProvider theme={defaultTheme}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
@@ -150,11 +192,27 @@ export default function Login() {
                 >
                   {loading ? "loading" : "login"}
                 </Button>
+
+                <GoogleOAuthProvider clientId="380822268085-2rhgruht8d02s8kkpgf4l2u16e8srrqf.apps.googleusercontent.com">
+                  <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      const details = jwt_decode(credentialResponse.credential);
+                      googleSign(details.name, details.email);
+                    }}
+                    onError={() => {
+                      console.log("Login Failed");
+                    }}
+                  />
+                </GoogleOAuthProvider>
+
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
+                    <span
+                      onClick={handleForgotPasswordClick}
+                      style={{ cursor: "pointer" }}
+                    >
                       Forgot password?
-                    </Link>
+                    </span>
                   </Grid>
                   <Grid item>
                     <Link href="/register" variant="body2">

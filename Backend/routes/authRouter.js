@@ -11,6 +11,15 @@ authRouter.post('/register',trycatchmiddleware( authController.createuser));
 authRouter.post('/login', authController.userLogin);
 authRouter.post('/bookdetails',authController.bookDetails);
 authRouter.post('/details',authController.getDetails);
+authRouter.post('/otpcheck',authController.otpcheck);
+authRouter.post('/forgetpass',authController.forgetpass);
+authRouter.post('/changepassword',authController.changepassword);
+
+
+
+
+authRouter.post('/googlelogin',authController.googlelogin);
+
 
 
 

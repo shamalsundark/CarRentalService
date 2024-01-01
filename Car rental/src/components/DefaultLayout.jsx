@@ -1,54 +1,173 @@
 import React from 'react';
-import logo from '../components/assests/logo.png'; 
+import { Link, useNavigate } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import logo from '../components/assests/logo.png';
+import { useSelector } from 'react-redux';
 
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useNavigate } from 'react-router-dom';
+const pages = ['Home', 'Cars', 'Deals'];
+const settings = ['Registration', 'Login', 'Logout'];
 
-function DefaultLayout() {
-    const navigate = useNavigate()
+function ResponsiveAppBar({ userName }) {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElCar, setAnchorElCar] = React.useState(null);
+
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenCarMenu = (event) => {
+    setAnchorElCar(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleCloseCarMenu = (type) => {
+    console.log(type);
+    navigate(`/${type.toLowerCase()}`);
+    setAnchorElCar(null);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('persist:root');
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
-
-    <Navbar expand="lg" className="bg-warning" >
-      <Container fluid>
-        <Navbar.Brand onClick={() =>navigate("/") }>
-          <img src={logo} alt="Logo" width="120" height="50" style={{paddingTop:10}} /> 
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto"
+    <AppBar position="static" sx={{ backgroundColor: 'white' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'orange',
+              textDecoration: 'none',
+            }}
           >
-            <Nav.Link onClick={() =>navigate("/") }>Home</Nav.Link>
-            <Nav.Link href="#action2">Deals</Nav.Link>
-            <NavDropdown title="Sign/Registration" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3"></NavDropdown.Item>
-              <NavDropdown.Item  onClick={() => navigate("/Register")}>Registration</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={() =>navigate("/Login") }>Sign in</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link onClick={() =>navigate("/cars") } >
-              Cars
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+            <div className="logo-container">
+              <img src={logo} alt="logoimage" width="150" height="100" className="logo" />
+            </div>
+          </Typography>
 
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ mx: 2, color: 'black' }}
+              >
+                {page === 'Cars' ? (
+                  <>
+                    <Link to="/cars" style={{ textDecoration: 'none', color: 'black' }}>
+                      Cars
+                    </Link>
+                    <IconButton
+                      size="small"
+                      edge="end"
+                      aria-label="dropdown"
+                      aria-haspopup="true"
+                      onClick={handleOpenCarMenu}
+                      color="inherit"
+                      sx={{ marginLeft: 2 }}
+                    >
+                      <ArrowDropDownIcon />
+                    </IconButton>
+                    <Menu
+                      anchorEl={anchorElCar}
+                      open={Boolean(anchorElCar)}
+                      onClose={() => handleCloseCarMenu()}
+                      sx={{ marginTop: '40px' }}
+                    >
+                      {['Sedan', 'Muv', 'Suv', 'Luxury'].map((type) => (
+                        <MenuItem key={type} onClick={() => handleCloseCarMenu(type)}>
+                          {type}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </>
+                ) : page === 'Home' ? (
+                  <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+                    {page}
+                  </Link>
+                ) : (
+                  page
+                )}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+
+        <Box sx={{ flexGrow: 0, marginLeft: 2, marginTop: '2px' }}>
+          <Tooltip title={`Hello ${currentUser?.rest?.name}`}>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 3 }}>
+              <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                {setting === 'Registration' ? (
+                  <Button sx={{ width: '100%' }} onClick={() => navigate('/register')}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </Button>
+                ) : setting === 'Login' ? (
+                  <Button sx={{ width: '100%' }} onClick={() => navigate('/login')}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </Button>
+                ) : (
+                  <Button sx={{ width: '100%' }} onClick={setting === 'Logout' ? logout : null}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </Button>
+                )}
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      </Box>
+    </AppBar>
   );
 }
 
-export default DefaultLayout;
+export default ResponsiveAppBar;

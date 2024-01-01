@@ -85,7 +85,9 @@ export default function AdminHome() {
   const handleDashButtonClick = () => {
     navigate('/AdminDash');
   };
-
+  const handleallcarsbuttonClick = () => {
+    navigate ('/Admincars')
+  }
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -180,7 +182,7 @@ export default function AdminHome() {
           <ListSubheader component="div" inset>
             Content
           </ListSubheader>
-          <ListItemButton >
+          <ListItemButton onClick={handleallcarsbuttonClick}        >
             <ListItemIcon>
               <AssignmentIcon />
             </ListItemIcon>

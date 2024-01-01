@@ -18,6 +18,20 @@ import CarDetails from './pages/CarDetails'
 import Userlist from './pages/Userlist'
 import AdminDash from './pages/AdminDash'
 import { ToastContainer } from 'react-toastify';
+import FinalDetailss from './pages/FinalDetailss'
+import CustomerDetailsForm from './pages/CustomerDetailsForm'
+import AdminCars from './pages/AdminCars'
+import '../src/pages/Otps.css'
+import Otp from './pages/Otp'
+import Chatbox from './pages/Chatbox'
+import Aboutus from './pages/Aboutus'
+import ContactForm from './pages/Contactus'
+import Forgotpassword from './pages/Forgotpassword'
+import PasswordChange from './pages/PasswordChange'
+import AdminEdit from './pages/AdminEdit'
+import PaymentSection from './pages/PaymentSection'
+
+
 
 
 
@@ -45,12 +59,26 @@ function App() {
      <Route path="/muv" element={<Muv/>}/>
      <Route path="/luxury" element={<Luxury/>}/>
      <Route path="/details/:id" element={<CarDetails/>}/>
+     <Route path="/finaldetails/:id" element={<FinalDetailss/>} />
+     <Route path="/customerform" element={<CustomerDetailsForm/>}/>
+     <Route path="/Otp/:email" element={<Otp/>}/>
+     <Route path="/chat" element={<Chatbox/>}/>
+     <Route path="/aboutus" element={<Aboutus/>}/>
+     <Route path="/contactus" element={<ContactForm/>}/>
+     <Route path="/forgot" element={<Forgotpassword/>}/>
+     <Route path="/password_change" element={<PasswordChange/>}/>
+     <Route path="/payment" element={<PaymentSection/>}/>
+
+     
+
 
      
      <Route path="/adminhome" element={<AdminHome/>}/>
    <Route element={<AdminHome/>}>
     <Route path="/users" element={<Userlist/>}/>
     <Route path="/admindash" element={<AdminDash/>}/>
+    <Route path="/Admincars" element={<AdminCars/>}/>
+    <Route path="/Adminedit/:carId" element={<AdminEdit/>}/>
     
    </Route>
      </Routes>

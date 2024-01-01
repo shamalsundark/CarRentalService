@@ -28,7 +28,33 @@ const detailSchema = new mongoose.Schema({
     dropOffTime: {
         type: String,
         required: true
-    }
+    },
+    pickupHour:{
+        type: Number,
+        
+    },
+    pickupMinute:{
+        type: Number,
+       
+    },
+    pickupPeriod:{
+        type:String,
+        
+    },
+    dropoffHour:{
+        type: Number,
+        
+    },
+    dropoffMinute:{
+        type: Number,
+       
+    },
+    dropPeriod:{
+        type:String,
+        
+    },
+
+
 })
  
 module.exports = mongoose.model('Details', detailSchema)

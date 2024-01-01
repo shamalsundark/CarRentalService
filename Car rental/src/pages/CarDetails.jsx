@@ -1,14 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCar, faGasPump, faMoneyBill, faUsers, faCog, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import DefaultLayout from '../components/DefaultLayout';
+import Footer from './Footer';
 
 const carDetailsStyle = {
-  maxWidth: '800px',
+  maxWidth: '500px',
   margin: 'auto',
   padding: '20px',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   borderRadius: '8px',
-  backgroundColor: '#f8f9fa', // Background color added
+  backgroundColor: 'white', 
 };
 
 const imageStyle = {
@@ -21,18 +25,23 @@ const imageStyle = {
 
 const textStyle = {
   color: '#333',
-  fontFamily: 'Arial, sans-serif', // Adjust the font family
-  fontSize: '1.2rem', // Adjust the font size
-  lineHeight: '1.4', // Adjust the line height
+  fontFamily: 'Arial, sans-serif',
+  fontSize: '1.2rem',
+  lineHeight: '1.4',
+};
+
+const iconStyle = {
+  marginRight: '8px',
 };
 
 function CarDetails() {
   const [car, setCar] = useState();
+  console.log(car);
   const { id } = useParams();
 
   const getCarDetails = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/details', { id });
+      const response = await axios.post(`http://localhost:5000/api/auth/details`, { id });
       setCar(response.data.cars);
     } catch (error) {
       console.log(error);
@@ -43,20 +52,60 @@ function CarDetails() {
     getCarDetails();
   }, []);
 
+  const handleRentButtonClick = () => {
+    navigate(`/finaldetails/${car._id}`);
+  };
+
+  const navigate = useNavigate();
+
   return (
-    <div style={carDetailsStyle}>
-      {car && (
-        <>
-          <h1 style={{ ...textStyle, fontSize: '2rem', marginBottom: '10px', color: '#007bff' }}>{car.title}</h1>
-          <h3 style={textStyle}>{car.description}</h3>
-          <img src={car.image} alt="" style={imageStyle} />
-          <h3 style={{ ...textStyle, fontWeight: 'bold', marginTop: '20px' }}>PRICE: ${car.price}</h3>
-          <h4 style={textStyle}>SEAT: {car.seat}</h4>
-          <h4 style={textStyle}>FUEL: {car.fuel}</h4>
-          <h4 style={textStyle}>TRANSMISSION: {car.transmission}</h4>
-          <button>RENT IT</button>
-        </>
-      )}
+    <div>
+      <header className="sticky-top">
+        <DefaultLayout />
+      </header>
+      <div style={carDetailsStyle}>
+        {car && (
+          <>
+            <h1 style={{ ...textStyle, fontSize: '2rem', marginBottom: '10px', color: 'darkred' }}>{car.title}</h1>
+            <h3 style={textStyle}>{car.description}</h3>
+            <img src={car.image} alt="" style={imageStyle} />
+            <h3 style={{ ...textStyle, fontWeight: 'bold', marginTop: '20px' }}>
+              <FontAwesomeIcon icon={faMoneyBill} style={iconStyle} />
+              PRICE: <h5>starts from</h5>  ₹{car.price}
+            </h3>
+            <h4 style={textStyle}>
+              <FontAwesomeIcon icon={faUsers} style={iconStyle} />
+              SEAT: {car.seat}
+            </h4>
+            <h4 style={textStyle}>
+              <FontAwesomeIcon icon={faGasPump} style={iconStyle} />
+              FUEL: {car.fuel}
+            </h4>
+            <h4 style={textStyle}>
+              <FontAwesomeIcon icon={faCog} style={iconStyle} />
+              TRANSMISSION: {car.transmission}
+            </h4>
+            <button
+              onClick={() => handleRentButtonClick(car?._id)}
+              style={{
+                padding: '10px 20px',
+                fontSize: '1rem',
+                marginTop: '10px',
+                backgroundColor: '#007bff',
+                color: '#fff',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              <FontAwesomeIcon icon={faCar} style={{ ...iconStyle, marginRight: '0' }} />
+              RENT IT <FontAwesomeIcon icon={faArrowRight} style={{ marginLeft: '5px' }} />
+            </button>
+          </>
+        )}
+      </div>
+      <div>
+        <Footer/>
+      </div>
     </div>
   );
 }
