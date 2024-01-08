@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import DefaultLayout from '../components/DefaultLayout';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
+import { useDispatch } from 'react-redux';
+import { bookedCarDetails } from '../redux/user/bookingDetails/bookingSlice';
 
 function Muv() {
   const [cars, setCars] = useState([]);
@@ -22,12 +24,14 @@ function Muv() {
 
     getAllCars();
   }, []);
+  const dispatch = useDispatch()
 
   const filterMuvCars = () => {
     return cars.filter((car) => car.model === 'muv');
   };
 
   const handleCarClick = (id) => {
+    dispatch( bookedCarDetails(id))
     console.log(id);
     navigate(`/details/${id}`);
   };

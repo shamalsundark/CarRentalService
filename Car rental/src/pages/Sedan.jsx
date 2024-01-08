@@ -5,6 +5,9 @@ import DefaultLayout from '../components/DefaultLayout';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import '../pages/Sedan.css';
+import { useDispatch } from 'react-redux';
+import { bookedCarDetails } from '../redux/user/bookingDetails/bookingSlice';
+
 function Sedan() {
   const [cars, setCars] = useState([]);
   const navigate = useNavigate();
@@ -21,8 +24,10 @@ function Sedan() {
 
     getAllCars();
   }, []);
+  const dispatch = useDispatch()
 
   const handleCarClick = (id) => {
+    dispatch( bookedCarDetails(id))
     console.log(id);
     navigate(`/details/${id}`);
   };

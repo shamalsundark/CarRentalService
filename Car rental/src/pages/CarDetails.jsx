@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faGasPump, faMoneyBill, faUsers, faCog, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import DefaultLayout from '../components/DefaultLayout';
 import Footer from './Footer';
+import Socialmedia from './Socialmedia';
 
 const carDetailsStyle = {
   maxWidth: '500px',
@@ -105,6 +106,9 @@ function CarDetails() {
       </div>
       <div>
         <Footer/>
+      </div>
+      <div>
+        <Socialmedia/>
       </div>
     </div>
   );

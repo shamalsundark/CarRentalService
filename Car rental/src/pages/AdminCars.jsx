@@ -1,11 +1,9 @@
 import React, {useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Paginationn from './Pagination';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons from react-icons library
-
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; 
 const ITEMS_PER_PAGE = 6;
 
 function AdminCars() {

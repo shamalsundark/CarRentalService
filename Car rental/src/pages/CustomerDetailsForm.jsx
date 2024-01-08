@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import Socialmedia from "./Socialmedia";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const UserForm = () => {
   const {
@@ -14,6 +16,9 @@ const UserForm = () => {
     formState: { errors },  
   } = useForm();
 
+  const navigate = useNavigate()
+
+
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(
@@ -21,10 +26,16 @@ const UserForm = () => {
         formData
       );
       toast.success("Success");
+      navigate('/payment')
     } catch (error) {
       console.log(error);
     }
   };
+
+
+  // const handleNextButtonClick = () => {
+  //   navigate('/payment')
+  // }
 
   return (
     <>
@@ -233,7 +244,7 @@ const UserForm = () => {
             {errors.city && <p>{errors.city.message}</p>}
 
             <label style={{ marginLeft: "60px" }} className="mt-3">
-              Contact Person
+              Contact Person Number
             </label>
             <Controller
               name="contactPerson"
@@ -257,7 +268,7 @@ const UserForm = () => {
             {errors.contactPerson && <p>{errors.contactPerson.message}</p>}
           </div>
           <div style={{ paddingBottom: "80px" }} className="">
-            <button
+            <button 
               className="mt-5"
               style={{
                 padding: "10px 20px",

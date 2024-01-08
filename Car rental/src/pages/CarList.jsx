@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import DefaultLayout from '../components/DefaultLayout';
 import Footer from './Footer';
+import Socialmedia from './Socialmedia';
 
 
 function CarList() {
@@ -42,6 +43,9 @@ function CarList() {
       </div>
       <div>
         <Footer/>
+      </div>
+      <div>
+        <Socialmedia/>
       </div>
     </div>
   );

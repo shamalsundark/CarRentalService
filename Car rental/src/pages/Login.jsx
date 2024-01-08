@@ -92,8 +92,12 @@ export default function Login() {
         toast.success(data.message);
       } 
     } catch (error) {
+      if(error.response.status==401) {
+        toast.error("login failed ur suspended")
+      }else{
       dispatch(siginFailure(error.message));
       toast.error(error.message);
+      }
     }
   };
 
@@ -104,9 +108,9 @@ export default function Login() {
 
   return (
     <div>
-      <header className="sticky-top">
+      {/* <header className="sticky-top">
         <DefaultLayout />
-      </header>
+      </header> */}
       <ThemeProvider theme={defaultTheme}>
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />

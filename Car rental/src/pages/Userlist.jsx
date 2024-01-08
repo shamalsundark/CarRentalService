@@ -1,14 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Paginationn from './Pagination';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Paginationn from "./Pagination";
+import { toast } from "react-toastify";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -23,21 +24,21 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 
-const StyledButton = styled('button')(() => ({
+const StyledButton = styled("button")(() => ({
   backgroundColor: "orange",
   color: "black",
-  borderRadius: '15px', 
-  padding: '10px 16px', 
-  cursor: 'pointer',
-  zIndex: 4, 
+  borderRadius: "15px",
+  padding: "10px 16px",
+  cursor: "pointer",
+  zIndex: 4,
 }));
 
 export default function CustomizedTables() {
@@ -51,7 +52,9 @@ export default function CustomizedTables() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/getuser");
+        const response = await axios.get(
+          "http://localhost:5000/api/admin/getuser"
+        );
         setUserList(response.data);
       } catch (error) {
         console.error("Error fetching user list:", error);
@@ -61,13 +64,22 @@ export default function CustomizedTables() {
     fetchUsers();
   }, []);
 
-  const handleBlockClick = (userId) => {
-    // Add logic to handle blocking the user with the given userId
-    console.log(`Block user with ID: ${userId}`);
+  const handleBlockClick = async (userId, e) => {
+    e.preventDefault();
+    try {
+      const block = await axios.put(
+        `http://localhost:5000/api/admin/users/${id}`,
+        { adminSuspended: true }
+
+      );
+      toast.success("user blocked")
+    } catch (error) {
+      console.log(error);
+    }
+   
   };
 
   const handleViewClick = (userId) => {
-    // Add logic to handle viewing details of the user with the given userId
     console.log(`View details of user with ID: ${userId}`);
   };
 
@@ -91,8 +103,12 @@ export default function CustomizedTables() {
               <StyledTableCell align="right">{user.email}</StyledTableCell>
               <StyledTableCell align="right">{user._id}</StyledTableCell>
               <StyledTableCell align="right">
-                <StyledButton onClick={() => handleBlockClick(user._id)}>Block</StyledButton>
-                <StyledButton onClick={() => handleViewClick(user._id)}>View</StyledButton>
+                <StyledButton onClick={() => handleBlockClick(user._id)}>
+                  Block
+                </StyledButton>
+                <StyledButton onClick={() => handleViewClick(user._id)}>
+                  View
+                </StyledButton>
               </StyledTableCell>
             </StyledTableRow>
           ))}

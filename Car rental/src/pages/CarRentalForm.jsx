@@ -21,13 +21,27 @@ function CarRentalForm() {
   });
 
   const dispatch = useDispatch()
-  
   const handleChange = (e) => {
+    const { name, value } = e.target;
+  
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+  
+    if (name === 'pickupDate') {
+      const minDropOffDate = new Date(value);
+      minDropOffDate.setDate(minDropOffDate.getDate() + 1);
+  
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        dropOffDate: '',
+      }));
+  
+      document.getElementById('dropOffDate').min = minDropOffDate.toISOString().split('T')[0];
+    }
   };
+  
   
   function getTomorrowDate() {
     const tomorrow = new Date();
@@ -43,6 +57,8 @@ function CarRentalForm() {
     return `${year}-${month}-${day}`;
   }
 
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(  bookingStart())
@@ -55,8 +71,8 @@ function CarRentalForm() {
       ...formData,
       pickupTime,
       dropOffTime,
-      pickupDate: new Date(formData.pickupDate).toISOString().split('T')[0],
-      dropOffDate: new Date(formData.dropOffDate).toISOString().split('T')[0],
+      pickupDate: new Date(formData.pickupDate),
+      dropOffDate: new Date(formData.dropOffDate)
     };
     
 

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const car = require("../models/carSchema");
 const userSchema = require("../models/userSchema");
 const carSchema = require("../models/carSchema");
+const contactusSchema = require("../models/contactusSchema");
 
 require("dotenv").config();
 
@@ -176,6 +177,28 @@ module.exports = {
         success: false,
         message: "You dont make any edit",
       });
+
     }
   },
+  getContactMessage: async (req,res)=>{
+    const message = await contactusSchema.find()
+    console.log(message);
+    res.json(message)
+ },
+ manageUser:async (req,res)=>{
+  const id = req.params.id;
+  const updateData=req.body;
+  const user = await User.findOne({_id:id});
+  if(!user){
+    return res.status(404).json({
+      status:'error',
+      message:'No Such User'
+    })
+  }
+  await User.findbyIdAndUpdate(id,{$set:updateData});
+  res.status(201).json({
+    status:'success',
+    message:'successfully updated user'
+  });
+ }
 };

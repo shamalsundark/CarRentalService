@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    bookingDetails:null,
+    currentBooking:null,
+    currentCarDetails:null,
     error:null,
     loading:false,
 }
@@ -22,10 +23,13 @@ const bookingSlice = createSlice({
         bookingFailure:(state,action)=>{
             state.loading = false;
             state.error = action.payload
+        },
+        bookedCarDetails:(state,action)=>{
+            state.currentCarDetails = action.payload
         }
     }
 })
 
-export const {bookingStart,bookingSuccess,bookingFailure}=bookingSlice.actions
+export const {bookingStart,bookingSuccess,bookingFailure,bookedCarDetails}=bookingSlice.actions
 
 export default bookingSlice.reducer;

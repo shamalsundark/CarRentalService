@@ -23,6 +23,9 @@ adminRouter.patch('/deletecar',tryCatchMiddleware(adminController.deleteCar))
 adminRouter.post('/editcar',tryCatchMiddleware(adminController.editCar))
 
 adminRouter.post('/editcardata',tryCatchMiddleware(adminController.editCarData))
+adminRouter.get('/contactmessages',tryCatchMiddleware(adminController.getContactMessage))
+adminRouter.put('/users/:id',tryCatchMiddleware(adminController.manageUser))
+
 
 
 

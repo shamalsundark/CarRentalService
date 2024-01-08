@@ -94,9 +94,12 @@ export default function AdminHome() {
   };
 
   const handleLogout = () => {
-
+   navigate('/login')
   }
-
+ 
+  const handleContactUs = () => {
+    navigate('/contactus')
+  }
   return (
    
       <><ThemeProvider theme={defaultTheme}>
@@ -188,7 +191,7 @@ export default function AdminHome() {
             </ListItemIcon>
             <ListItemText primary="View cars" />
           </ListItemButton>
-          <ListItemButton >
+          <ListItemButton onClick={handleContactUs}>
             <ListItemIcon>
               <AdjustIcon/>
             </ListItemIcon>

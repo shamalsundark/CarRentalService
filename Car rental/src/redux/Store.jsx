@@ -3,9 +3,10 @@ import userReducer from './user/userSlice'
 import{ persistReducer,persistStore }from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import bookingSlice from './user/bookingDetails/bookingSlice';
+import priceSlice from '../redux/updatedPrice/updatedpriceSlice'
 
 
-const rootReducer = combineReducers({ user: userReducer,booking:bookingSlice});
+const rootReducer = combineReducers({ user: userReducer,booking:bookingSlice,price:priceSlice });
 
 const persistConfig = {
   key: 'root',

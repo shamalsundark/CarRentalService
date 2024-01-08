@@ -1,0 +1,31 @@
+.profileleft{
+    background-color: cadetblue;
+    height: 80vh;
+    width: 60vh;
+    margin-top: 30px;
+    border-radius: 3rem;
+    margin-left: 20px;
+}
+.profileright{
+    background-color: black;
+    height: 75vh;
+    width: 90vh;
+    margin-top: 30px;
+    border-radius: 3rem;
+}
+.profilemain{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.leftsmall{
+    background-color: black;
+   height: 25vh;
+    
+}
+.avatarp{
+    position: relative;
+    left: 170px;
+    top: 110px;
+    
+}

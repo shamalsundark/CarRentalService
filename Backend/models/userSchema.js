@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     token:{
         type:String,
         default:''
+    },
+    adminSuspended:{
+        type:Boolean,
+        default:false
     }
 })
 userSchema.pre('save',async function(next){

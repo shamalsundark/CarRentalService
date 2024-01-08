@@ -256,7 +256,7 @@ const forgetpass = async (req,res) =>{
   }
 }
 
-const sentResetPassword = async (email, token) => {
+const sentResetPassword = async (email, token,) => {
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -271,6 +271,7 @@ const sentResetPassword = async (email, token) => {
         pass: process.env.PASS,
       },
     });
+  
     const mailOption = {
       from: process.env.EMAIL,
       to: email,
