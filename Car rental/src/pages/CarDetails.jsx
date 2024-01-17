@@ -6,6 +6,8 @@ import { faCar, faGasPump, faMoneyBill, faUsers, faCog, faArrowRight } from '@fo
 import DefaultLayout from '../components/DefaultLayout';
 import Footer from './Footer';
 import Socialmedia from './Socialmedia';
+import { useSelector } from 'react-redux';
+
 
 const carDetailsStyle = {
   maxWidth: '500px',
@@ -53,9 +55,21 @@ function CarDetails() {
     getCarDetails();
   }, []);
 
+  const { currentUser } = useSelector((state) => state.user);
+
   const handleRentButtonClick = () => {
-    navigate(`/finaldetails/${car._id}`);
+    if (currentUser) {
+      navigate(`/finaldetails/${car?._id}`);
+    } else {
+      navigate('/login'); 
+    }
   };
+
+  // const isLoggedIn = () => {
+     
+  //   return true; 
+  // };
+
 
   const navigate = useNavigate();
 

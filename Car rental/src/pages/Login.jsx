@@ -12,7 +12,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import DefaultLayout from "../components/DefaultLayout";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,24 +81,28 @@ export default function Login() {
       );
       const data = await res.data;
       console.log(data);
+      console.log(data);
       if (data.status === "usersuccess") {
         dispatch(siginSuccess(data));
+        localStorage.setItem("token", data.data);
         navigate("/");
-
+    
         toast.success(data.message);
       } else if (data.status === "adminsuccess") {
+        localStorage.setItem("admin_token",data.data.jwt_token);
         navigate("/adminhome");
         toast.success(data.message);
-      } 
-    } catch (error) {
-      if(error.response.status==401) {
-        toast.error("login failed ur suspended")
+
       }else{
       dispatch(siginFailure(error.message));
       toast.error(error.message);
       }
+      } 
+     catch (error) {
+      if(error.response.status==401) {
+        toast.error("login failed ur suspended")
     }
-  };
+  }};
 
   const handleForgotPasswordClick = () => {
     navigate("/forgot");
@@ -149,10 +152,9 @@ export default function Login() {
                 alignItems: "center",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
+              <Typography component="h1" onClick='submit' variant="h5">
+              Sign Up
+            </Typography>
               <Box
                 component="form"
                 noValidate
@@ -192,9 +194,9 @@ export default function Login() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  disabled={loading}
+                  // disabled={loading}
                 >
-                  {loading ? "loading" : "login"}
+                  {loading ? "LOGIN" : "login"}
                 </Button>
 
                 <GoogleOAuthProvider clientId="380822268085-2rhgruht8d02s8kkpgf4l2u16e8srrqf.apps.googleusercontent.com">
@@ -231,4 +233,4 @@ export default function Login() {
       </ThemeProvider>
     </div>
   );
-}
+  }

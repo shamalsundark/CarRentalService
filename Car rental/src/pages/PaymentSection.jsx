@@ -12,10 +12,52 @@ import Socialmedia from "./Socialmedia";
 
 const PaymentSection = () => {
   const [car, setCar] = useState({});
+ 
   const { currentBooking } = useSelector((state) => state.booking);
   const { currentCarDetails } = useSelector((state) => state.booking);
   const { updatedPrice } = useSelector((state) => state.price);
+  const { currentUser } = useSelector((state) => state.user);
   const id = currentCarDetails;
+
+  const Razorpay = async(e)=>{
+    e.preventDefault();  
+    
+    var options = {
+      key: "rzp_test_LarllNYjBbsQE5",
+      key_secret:"uRYhTQETdBPllUGu5FcKBLyF",
+      amount:totalAmount * 100,
+      currency:"INR",
+      name:"Wheels on Road",
+      description:"Just For The Text Purpose",
+      handler: function async(response){
+        console.log(response,"response");
+        const { razorpay_payment_id : payment_id } = response;
+        console.log(payment_id,"payment ID");
+        if(response){
+          const updateStatus = axios.post("http://localhost:5000/api/admin/payments", {payment_id,car, currentUser ,currentBooking,currentCarDetails,updatedPrice}, {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        });
+          // navigate('/')
+        }
+      },
+      prefill:{
+        name:"Arshaquu",
+        email:"Muhammedarshaque@gmail.com",
+        contact : "9561478543"
+      },
+      notes:{
+        address:"Razorpay Coperative Office"
+      },
+      theme:{
+        color:'#FCE22A'
+      }
+    }
+    var pay = new window.Razorpay(options);
+    pay.open()
+  
+}
+
+  
 
   const getCarDetails = async () => {
     try {
@@ -28,14 +70,14 @@ const PaymentSection = () => {
       console.log(error);
     }
   };
-
+  
   useEffect(() => {
     getCarDetails();
   }, [currentBooking]);
 
-  // Calculate total amount by adding amount price and GST
+  
   const amountPrice = updatedPrice || 0;
-  const gstPrice = 500; // Assuming GST is a fixed value
+  const gstPrice = 500; 
   const totalAmount = amountPrice + gstPrice;
 
   return (
@@ -76,7 +118,7 @@ const PaymentSection = () => {
             <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px' }}>Total Amount: ₹{totalAmount}</h3>
           </div>
           <button type="button" class="button">
-  <div class="button-top">PAY NOW</div>
+  <button type="button" onClick={Razorpay} class="button-top">PAY NOW</button>
   <div class="button-bottom"></div>
   <div class="button-base"></div>
 </button>

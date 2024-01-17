@@ -4,6 +4,8 @@ const adminRouter = express.Router();
 
 const adminController = require('../controllers/adminController')
 
+const orderController = require('../controllers/orderController')
+
 const tryCatchMiddleware = require('../middleware/tryCatchMiddleware');
 
 const verifyToken = require('../middleware/adminAuthMiddleware')
@@ -25,6 +27,8 @@ adminRouter.post('/editcar',tryCatchMiddleware(adminController.editCar))
 adminRouter.post('/editcardata',tryCatchMiddleware(adminController.editCarData))
 adminRouter.get('/contactmessages',tryCatchMiddleware(adminController.getContactMessage))
 adminRouter.put('/users/:id',tryCatchMiddleware(adminController.manageUser))
+adminRouter.post('/payments',tryCatchMiddleware(orderController.order))
+adminRouter.get('/deals',verifyToken,tryCatchMiddleware(adminController.getOrdersById))
 
 
 

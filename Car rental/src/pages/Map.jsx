@@ -23,7 +23,7 @@ function Map() {
   }, []); // Empty dependency array to run the effect only once on mount
 
   return (
-    <div>
+    <div style={{marginTop:'50px'}}>
       <div className='wrapper'>
         <div className='map'>
           <div style={{ width: '100%' }}>

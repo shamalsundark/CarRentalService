@@ -1,18 +1,25 @@
-
 const jwt = require("jsonwebtoken");
 
-module.exports = function varifyTocken(req,res,next){
-    const auth = req.headers["authorization"];
-    const token = auth && auth.split(" ")[1];
+module.exports = function verifyToken(req, res, next) {
+    const authorizationHeader = req.headers["authorization"];
 
-    if(!token){
-        return res.status(403).json({error:"No token provided"});
+    if (!authorizationHeader) {
+        return res.status(403).json({ error: "No token provided" });
     }
-    jwt.verify(token,process.env.ADMIN_ACCESS_TOKEN_SECRET,(err,decode)=>{
-        if(err){
-            return res.status(401).json({error:"unauthorized"});
+
+    const token = authorizationHeader.split(" ")[1];
+    
+
+    if (!token) {
+        return res.status(403).json({ error: "No token provided" });
+    }
+
+    jwt.verify(token, process.env.USER_ACCESS_TOKEN_SECRET, (err, decode) => {
+        if (err) {
+            return res.status(401).json({ error: "unauthorized" });
         }
-           req.username = decode.username;
-           next()
-    })
-}
+        
+        req.username = decode.email;
+        next();
+    });
+};

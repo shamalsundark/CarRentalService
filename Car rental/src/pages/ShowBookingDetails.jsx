@@ -20,7 +20,7 @@ function ShowBookingDetails() {
               style={{ width: "300px", padding: "20px", marginBottom: "20px" }}
             >
               <p>
-                <strong>Pickup Location:</strong>{" "}
+                <strong>Pick Location:</strong>{" "}
                 {currentBooking?.detailsAdd?.pickupLocation}
               </p>
               <p>
@@ -34,8 +34,8 @@ function ShowBookingDetails() {
             >
               <p>
                 <strong>Pickup Date:</strong>{" "}
-                {new Date(currentBooking?.detailsAdd?.dropOffDate).toLocaleDateString()}
-
+                {new Date(currentBooking?.detailsAdd?.pickupDate).toLocaleDateString()}
+              
               </p>
               <p>
                 <strong>Pickup Time:</strong>{" "}
@@ -48,7 +48,9 @@ function ShowBookingDetails() {
             >
               <p>
                 <strong>Drop Off Date:</strong>{" "}
-                {new Date(currentBooking?.detailsAdd?.pickupDate).toLocaleDateString()}
+                {new Date(currentBooking?.detailsAdd?.dropOffDate).toLocaleDateString()}
+
+               
               </p>
               <p>
                 <strong>Drop Off Time:</strong>{" "}

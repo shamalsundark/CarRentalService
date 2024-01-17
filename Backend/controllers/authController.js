@@ -6,22 +6,21 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const express = require("express");
 const router = express.Router();
-const randomstring = require('randomstring')
+const randomstring = require("randomstring");
 require("dotenv").config();
 
 const createuser = async (req, res) => {
-  
   const name = req.body.name;
   const email = req.body.email;
   const userExist = await User.findOne({ email: req.body.email });
-console.log(userExist);
-  if(userExist){
-   return res.status(400).send({message:"Given Email is already a user"})
+  console.log(userExist);
+  if (userExist) {
+    return res.status(400).send({ message: "Given Email is already a user" });
   }
 
   const password = req.body.password;
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPassword = await bcrypt.hash(password,salt);
   req.body.password = hashedPassword;
   const newuser = new User(req.body);
   await newuser.save();
@@ -72,41 +71,67 @@ const sentVerifyMail = async (name, email, otp) => {
 };
 
 const userLogin = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  try {
+    const { email, password } = req.body;
+    
+    // console.log(req.body);
 
-  if (user) {
+    if (
+      email === process.env.ADMIN_USERNAME &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign(
+        { email: email },
+        process.env.USER_ACCESS_TOKEN_SECRET
+      );
+    
+      return res.status(200).json({
+        status: "adminsuccess",
+        message: "admin successfully logged in",
+        data: { jwt_token: token },
+      });
+    }
+    
+    const user = await User.findOne({ email });
+
+    console.log(req.body.password);
+    console.log(user.password);
+    console.log(user);
+
+    const isMatch = await bcrypt.compare(req.body.password,user.password);
+
+    console.log(isMatch)
+    if (!isMatch) {
+    
+      throw new Error("Password is not match");
+    }
+
+    console.log(isMatch);
+
+   if(user&&isMatch){
+
     const token = jwt.sign(
       { email: email },
       process.env.USER_ACCESS_TOKEN_SECRET
     );
-    const {password:pass,...rest}=user._doc;
+
+    const { password: pass, ...rest } = user._doc;
+
     return res.status(200).json({
       status: "usersuccess",
       message: "user login successful",
       data: token,
-      rest:rest
+      rest: rest,
     });
   }
-
-  if (
-    email === process.env.ADMIN_USERNAME &&
-    password === process.env.ADMIN_PASSWORD
-  ) {
-    const token = jwt.sign(
-      { email: email },
-      process.env.USER_ACCESS_TOKEN_SECRET
-    );
-    return res.status(200).json({
-      status: "adminsuccess",
-      message: "admin successfully logged in",
-      data: { jwt_token: token },
-    });
-  } else {
-    return res.status(404).json({
-      status: "error",
-      message: "login failed",
-    });
+    else {
+      return res.status(404).json({
+        status: "error",
+        message: "login failed",
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -119,7 +144,10 @@ const otpcheck = async (req, res) => {
       const user = await User.find({ email: data });
       if (user) {
         if (user[0].otp == otp) {
-          const response = await User.updateOne({email: data},{$set:{ isVerified:true}});
+          const response = await User.updateOne(
+            { email: data },
+            { $set: { isVerified: true } }
+          );
           res.status(200).send({ message: "Please Login", success: true });
         } else {
           console.log("false");
@@ -152,7 +180,7 @@ const googlelogin = async (req, res) => {
   try {
     const email = req.body.email;
     const name = req.body.name;
-   
+
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       const token = jwt.sign(
@@ -234,29 +262,33 @@ const getDetails = async (req, res) => {
   }
 };
 
-const forgetpass = async (req,res) =>{
-  const email = req.body.email
+const forgetpass = async (req, res) => {
+  const email = req.body.email;
   try {
-    const userExist = await User.findOne({email:email})
-    if(userExist){
-      const token  = randomstring.generate();
+    const userExist = await User.findOne({ email: email });
+    if (userExist) {
+      const token = randomstring.generate();
       console.log(token);
-      const user = await User.updateOne({email:email},{$set:{token:token}})
-      
-      sentResetPassword(email,token)
-      res.status(200)
-      .send({message:"sent email successfully",success:true})
-    }
-    else{
-      res.status(404)
-      .send({message:"User Email is not found",success:false})
+      const user = await User.updateOne(
+        { email: email },
+        { $set: { token: token } }
+      );
+
+      sentResetPassword(email, token);
+      res
+        .status(200)
+        .send({ message: "sent email successfully", success: true });
+    } else {
+      res
+        .status(404)
+        .send({ message: "User Email is not found", success: false });
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-const sentResetPassword = async (email, token,) => {
+const sentResetPassword = async (email, token) => {
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -271,7 +303,7 @@ const sentResetPassword = async (email, token,) => {
         pass: process.env.PASS,
       },
     });
-  
+
     const mailOption = {
       from: process.env.EMAIL,
       to: email,
@@ -287,28 +319,32 @@ const sentResetPassword = async (email, token,) => {
   }
 };
 
-const changepassword = async(req,res) =>{
-const password = req.body.password
-const token = req.body.queryValues
-try {
-  const userData = await User.findOne({token:token})  
-if(userData){
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-  const updatepassword = await User.findOneAndUpdate({token:token},{$set:{password:hashedPassword}})
-  if(updatepassword){
-    res.status(200)
-    .send({message:"Password is updated successfully",success:true})
-  }
-}
-else{
-  res.status(404)
-  .send({message:"Something went Wrong while Updating Password..."})
-}
-} catch (error) {
- console.log(error); 
-}
-}
+const changepassword = async (req, res) => {
+  const password = req.body.password;
+  const token = req.body.queryValues;
+  try {
+    const userData = await User.findOne({ token: token });
+    if (userData) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const updatepassword = await User.findOneAndUpdate(
+        { token: token },
+        { $set: { password: hashedPassword } }
+      );
+      if (updatepassword) {
+        res
+          .status(200)
+          .send({ message: "Password is updated successfully", success: true });
+      }
+    } else {
+      res
+        .status(404)
+        .send({ message: "Something went Wrong while Updating Password..." });
+    }
+  } catch (error) {
+    console.log(error);
+  } 
+};
 
 module.exports = {
   createuser,
@@ -318,5 +354,5 @@ module.exports = {
   bookDetails,
   otpcheck,
   forgetpass,
-  changepassword
+  changepassword,
 };

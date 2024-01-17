@@ -4,6 +4,8 @@ const car = require("../models/carSchema");
 const userSchema = require("../models/userSchema");
 const carSchema = require("../models/carSchema");
 const contactusSchema = require("../models/contactusSchema");
+const paymentSchema = require("../models/paymentSchema")
+
 
 require("dotenv").config();
 
@@ -14,15 +16,16 @@ module.exports = {
       username === process.env.ADMIN_USERNAME &&
       password === process.env.ADMIN_PASSWORD
     ) {
-      const token = jwt.sign(
+      const admin_token = jwt.sign(
         { username: username },
         process.env.ADMIN_ACCESS_TOKEN_SECRET
       );
-      res.status(200).json({
-        status: "success",
-        message: "successfully logged in",
-        data: { jwt_token: token },
-      });
+      res
+        .status(200)
+        .send({ message: "Login Successfull", success: true, data: admin_token });
+
+
+
     } else {
       return res.status(404).json({
         status: "error",
@@ -183,7 +186,7 @@ module.exports = {
   getContactMessage: async (req,res)=>{
     const message = await contactusSchema.find()
     console.log(message);
-    res.json(message)
+    res.status(200).json(message)
  },
  manageUser:async (req,res)=>{
   const id = req.params.id;
@@ -200,5 +203,33 @@ module.exports = {
     status:'success',
     message:'successfully updated user'
   });
- }
+ },
+ getOrdersById: async (req, res) => {
+
+
+  try {
+
+
+   let email = req.username
+   
+  const user = await userSchema.findOne({email})
+  
+  const order = await paymentSchema.find({userId:user._id})
+
+    
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" }); 
+    }
+    
+    res.status(200).send({
+      status: "success",
+      message: "Successfully fetched orders",
+      data:order 
+      
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
 };

@@ -98,7 +98,7 @@ export default function AdminHome() {
   }
  
   const handleContactUs = () => {
-    navigate('/contactus')
+    navigate('/contactuss')
   }
   return (
    

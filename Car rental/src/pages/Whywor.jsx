@@ -2,7 +2,7 @@ import React from 'react'
 
 function Whywor() {
   return (
-    <div>
+    <div style={{marginTop:'70px'}}>
       <div className='description'>
         <h1>WHY WHEELSONROAD?</h1>
         <h4>We are a self drive vehicle rental agency, with offices all over Kerala.</h4>

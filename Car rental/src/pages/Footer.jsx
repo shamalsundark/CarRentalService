@@ -24,7 +24,7 @@ const Footer = () => {
       </div>
       <div className='footerhome'>
         <h5 onClick={()=>navigate('/contactus')}>CONTACT US</h5>
-        <h5>MY CONTACT</h5>
+        <h5 onClick={()=>navigate('/profilepage')}>MY CONTACT</h5>
         {/* <h5>LOGOUT</h5> */}
       </div>
       <div className='footerhome'>

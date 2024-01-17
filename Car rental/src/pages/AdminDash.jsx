@@ -167,23 +167,23 @@ const BasicCard = () => {
     }}
   >
     <div style={{ borderBottom: "1px solid black", borderTop: "1px solid black" }}>
-      <h2 style={{ color: "#02B2AF" }}>FIRST RIDE</h2>
-      <h4 style={{ color: "#2E96FF" }}>Get Up 50% Off</h4>
-      <h5 style={{color: "#60009B" }}>Your 1st Booking</h5>
+      <h2 style={{ color: "black" }}>FIRST RIDE</h2>
+      <h4 style={{ color: "black" }}>Get Up 50% Off</h4>
+      <h5 style={{color: "black" }}>Your 1st Booking</h5>
       <h5>CODE:FSTR666</h5>
     </div>
     <div style={{ borderBottom: "1px solid black", borderTop: "1px solid black" }}>
       <span>
-        <h2 style={{ color: "#2E96FF" }}>GET 15%OFF ON 5</h2>
-        <h4 style={{ color: "#02B2AF" }}>DAYS BOOKING</h4>
-        <h5 style={{color: "#60009B" }}>CODE:HAADV666</h5>
+        <h2 style={{ color: "black" }}>GET 15%OFF ON 5</h2>
+        <h4 style={{ color: "black" }}>DAYS BOOKING</h4>
+        <h5 style={{color: "black" }}>CODE:HAADV666</h5>
       </span>
     </div>
     <div style={{ borderBottom: "1px solid black", borderTop: "1px solid black" }}>
       <span>
-        <h2 style={{ color: "#2E96FF" }}>WEEKEND SPECIAL</h2>
-        <h4  style={{ color: "#02B2AF" }}>GET 5% OFF</h4>
-        <h4   style={{color: "#60009B" }}>DAYS BOOKING</h4>
+        <h2 style={{ color: "black" }}>WEEKEND SPECIAL</h2>
+        <h4  style={{ color: "black" }}>GET 5% OFF</h4>
+        <h4   style={{color: "black" }}>DAYS BOOKING</h4>
         <h5>CODE:WKND666</h5>
       </span>
     </div>

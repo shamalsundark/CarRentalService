@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BookingCar from "./pages/BookingCar";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import { FidgetSpinner } from 'react-loader-spinner'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login";
 import ShowBookingDetails from "./pages/ShowBookingDetails";
@@ -31,12 +32,30 @@ import AdminEdit from "./pages/AdminEdit";
 import PaymentSection from "./pages/PaymentSection";
 import Profilepage from "./pages/Profilepage";
 import AdminContactUs from "./pages/AdminContactUs";
+import { useSelector } from "react-redux";
+import AdminCoupon from "./pages/AdminCoupon";
+import Deals from "./pages/Deals";
+import PopularBrands from "./pages/PopularBrands";
+import Tags from "./pages/Tags";
 
 function App() {
+  const { loading } = useSelector((state) => state.alerts.loading);
   return (
-    <div>
-      <ToastContainer />
+    <div className="App">
       <BrowserRouter>
+      {loading && (
+        <div className="spinner-loading">
+        <FidgetSpinner
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="fidget-spinner-loading"
+            wrapperStyle={{}}
+            wrapperClass="fidget-spinner-wrapper"
+            />
+        </div>
+      )}
+      <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
@@ -60,6 +79,9 @@ function App() {
           <Route path="/password_change" element={<PasswordChange />} />
           <Route path="/payment" element={<PaymentSection />} />
           <Route path="/profilepage" element={<Profilepage />} />
+          <Route path="/deals" element={<Deals />} />
+          <Route path="/popular" element={<PopularBrands />} />
+          <Route path="/tags" element={<Tags />} />
           
 
           <Route path="/adminhome" element={<AdminHome />} />
@@ -68,7 +90,8 @@ function App() {
             <Route path="/admindash" element={<AdminDash />} />
             <Route path="/Admincars" element={<AdminCars />} />
             <Route path="/Adminedit/:carId" element={<AdminEdit />} />
-            {/* <Route path="/contactuss" element={<AdminContactUs />} /> */}
+            <Route path="/contactuss" element={<AdminContactUs />} />
+            <Route path="/couponedit" element={<AdminCoupon />} />
           </Route>
         </Routes>
       </BrowserRouter>

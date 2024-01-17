@@ -62,7 +62,7 @@ const UserForm = () => {
           className="user-form"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div style={{ display: "flex", fontFamily: "fantasy" }}>
+          <div style={{ display: "flex", fontFamily: "fantasy",marginLeft:'-70px' }}>
             <label className="mt-4 p-1">Name</label>
             <Controller
               name="name"
@@ -86,7 +86,7 @@ const UserForm = () => {
             />
             {errors.name && <p>{errors.name.message}</p>}
 
-            <label style={{ marginLeft: "50px" }} className="mt-4 p-1">
+            <label style={{ marginLeft: "150px" }} className="mt-4 p-1">
               Email:
             </label>
             <Controller
@@ -118,8 +118,8 @@ const UserForm = () => {
             {errors.email && <p>{errors.email.message}</p>}
           </div>
 
-          <div className="mt-3 " style={{ display: "flex", fontFamily: "fantasy" }}>
-            <label className="mt-4  ">Address</label>
+          <div className="mt-2 " style={{ display: "flex", fontFamily: "fantasy",marginLeft:'-80px' }}>
+            <label className="mt-4 p-1 ">Address</label>
             <Controller
               name="address"
               control={control}
@@ -142,7 +142,7 @@ const UserForm = () => {
             />
             {errors.address && <p>{errors.address.message}</p>}
 
-            <label style={{ marginLeft: "60px" }} className="mt-4 ">
+            <label style={{ marginLeft: "150px" }} className="mt-4 p-1">
               Phone
             </label>
             <Controller
@@ -160,7 +160,7 @@ const UserForm = () => {
                     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
                     border: "1px solid #ccc",
                   }}
-                  {...field}
+                  {...field}  
                   type="number"
                   placeholder="Enter your phone number"
                 />
@@ -169,8 +169,8 @@ const UserForm = () => {
             {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
           </div>
 
-          <div className="mt-3" style={{ display: "flex", fontFamily: "fantasy" }}>
-            <label className="mt-3">District</label>
+          <div className="mt-4 " style={{height:'40px', display: "flex", fontFamily: "fantasy",marginLeft:'-80px' }}>
+            <label style={{ marginLeft: "0px" }} className="mt-1 p-1">District</label>
             <Controller
               name="district"
               control={control}
@@ -186,14 +186,14 @@ const UserForm = () => {
                   }}
                   {...field}
                   type="text"
-                  placeholder="Enter your district"
+                  placeholder="Enter your district" 
                 />
               )}
             />
             {errors.district && <p>{errors.district.message}</p>}
 
-            <label style={{ marginLeft: "40px" }} className="mt-3">
-              Driver Licence Number
+            <label style={{ marginLeft:'140px', }} className="mt-2 p-1">
+               Licence 
             </label>
             <Controller
               className=" mt-3"
@@ -217,8 +217,8 @@ const UserForm = () => {
             />
             {errors.driverLicenceNumber && <p>{errors.driverLicenceNumber.message}</p>}
           </div>
-          <div className="mt-3" style={{ display: "flex", fontFamily: "fantasy" }}>
-            <label className="" style={{ marginLeft: "-155px", marginTop: "10px" }}>
+          <div className="mt-4" style={{ display: "flex", fontFamily: "fantasy" }}>
+            <label className="" style={{ marginLeft: "-50px", marginTop: "10px" }}>
               City
             </label>
             <Controller
@@ -243,8 +243,8 @@ const UserForm = () => {
             />
             {errors.city && <p>{errors.city.message}</p>}
 
-            <label style={{ marginLeft: "60px" }} className="mt-3">
-              Contact Person Number
+            <label style={{ marginLeft: "130px"}} className="mt-3">
+              Alternative
             </label>
             <Controller
               name="contactPerson"

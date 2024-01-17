@@ -7,24 +7,29 @@ import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import { useDispatch } from 'react-redux';
 import { bookedCarDetails } from '../redux/user/bookingDetails/bookingSlice';
+import { showLoading ,hideLoading } from '../redux/alertSlice';
 
 function Luxury() {
   const [cars, setCars] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     async function getAllCars() {
       try {
+        dispatch(showLoading())
         const response = await axios.get("http://localhost:5000/api/admin/cars");
         setCars(response.data.data);
+        dispatch(hideLoading());
       } catch (error) {
         console.error("Error fetching cars:", error);
+        dispatch(hideLoading());
       }
     }
 
     getAllCars();
-  }, []);
-  const dispatch = useDispatch()
+  }, [dispatch]);
 
   const filterLuxuryCars = () => {
     return cars.filter((car) => car.model === 'luxury');

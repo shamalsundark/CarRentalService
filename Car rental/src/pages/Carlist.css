@@ -1,0 +1,30 @@
+.carlist{
+    border:1px solid grey;
+    background-color: rgb(247, 247, 247);
+    padding: 2rem;
+    box-shadow:
+     inset 0 4px 8px -4px rgba(0, 0, 0, 0.5),
+     inset 0 -4px 8px -4px rgba(0, 0, 0, 0.5),
+     inset 4px 0 8px -4px rgba(0, 0, 0, 0.5),
+     inset -4px 0 8px -4px rgba(0, 0, 0, 0.5);
+     height: 35rem; /* Adjusted height */
+     width: 85rem; /* Adjusted width */
+     margin: auto;
+     margin-top: 60px;
+  
+ }
+ .searched{
+    border:1px solid grey;
+    background-color: rgb(247, 247, 247);
+    padding: 2rem;
+    box-shadow:
+     inset 0 4px 8px -4px rgba(0, 0, 0, 0.5),
+     inset 0 -4px 8px -4px rgba(0, 0, 0, 0.5),
+     inset 4px 0 8px -4px rgba(0, 0, 0, 0.5),
+     inset -4px 0 8px -4px rgba(0, 0, 0, 0.5);
+     height: 35rem; /* Adjusted height */
+     width: 85rem; /* Adjusted width */
+     margin: auto;
+     margin-top: 60px;
+ }
+ 

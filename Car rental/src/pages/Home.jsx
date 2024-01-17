@@ -8,6 +8,8 @@ import Whywor from "./Whywor";
 import Map from "./Map";
 import Footer from "./Footer";
 import Socialmedia from "./Socialmedia";
+import PopularBrands from "./PopularBrands"
+import Tags from "./Tags";
 
 function Home() {
   return (
@@ -19,11 +21,15 @@ function Home() {
       <CarRentalForm />
       <Discount />
       <Featured />
+      <PopularBrands/>
       <Vintage />
       <Map />
+      <Tags />
       <Whywor />
       <Footer />
       <Socialmedia />
+      
+      
     </div>
   );
 }
