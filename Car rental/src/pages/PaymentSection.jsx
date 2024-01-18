@@ -37,7 +37,7 @@ const PaymentSection = () => {
           const updateStatus = axios.post("http://localhost:5000/api/admin/payments", {payment_id,car, currentUser ,currentBooking,currentCarDetails,updatedPrice}, {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         });
-          // navigate('/')
+          navigate('/')
         }
       },
       prefill:{
@@ -101,12 +101,12 @@ const PaymentSection = () => {
           }}
         >
          
-          <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>Pickup Location: {currentBooking?.detailsAdd?.pickupLocation}</h4>
-          <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>Dropoff Location: {currentBooking?.detailsAdd?.dropOffLocation}</h4>
-          <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>Pickup Date:  {new Date(currentBooking?.detailsAdd?.dropOffDate).toLocaleDateString()}</h4>
-          <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>Dropoff Date: {new Date(currentBooking?.detailsAdd?.pickupDate).toLocaleDateString()}</h4>
-          <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>Pickup Time: {currentBooking?.detailsAdd?.pickupTime}</h4>
-          <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>Dropoff Time: {currentBooking?.detailsAdd?.dropOffTime}</h4>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 'light', marginBottom: '10px' }}>Pickup Location: {currentBooking?.detailsAdd?.pickupLocation}</h4>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 'light', marginBottom: '10px' }}>Dropoff Location: {currentBooking?.detailsAdd?.dropOffLocation}</h4>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 'light', marginBottom: '10px' }}>Pickup Date:  {new Date(currentBooking?.detailsAdd?.dropOffDate).toLocaleDateString()}</h4>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 'light', marginBottom: '10px' }}>Dropoff Date: {new Date(currentBooking?.detailsAdd?.pickupDate).toLocaleDateString()}</h4>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 'light', marginBottom: '10px' }}>Pickup Time: {currentBooking?.detailsAdd?.pickupTime}</h4>
+          <h4 style={{ fontSize: '1.2rem', fontWeight: 'light', marginBottom: '10px' }}>Dropoff Time: {currentBooking?.detailsAdd?.dropOffTime}</h4>
 
         
           <div style={{ marginTop: '20px', borderTop: '1px solid #ccc', paddingTop: '10px' }}>

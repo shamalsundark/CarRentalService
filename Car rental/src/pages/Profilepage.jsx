@@ -1,80 +1,23 @@
-// import React, { useEffect } from 'react'
-// import '../pages/Profilepage.css'
-// import DefaultLayout from "../components/DefaultLayout";
-// import { Avatar } from '@mui/material';
-// import { useSelector } from 'react-redux';
-// import { useState } from 'react';
-
-// const Profilepage = () => {
-//     const { currentUser } = useSelector((state) => state.user);
-//     const { updatedPrice } = useSelector((state) => state.price);
-//     const [car, setCar] = useState({});
-
-//     const getCarDetails = async () => {
-//         try {
-//           const response = await axios.post(
-//             `http://localhost:5000/api/auth/details`,
-//             { id }
-//           );
-//           setCar(response.data.cars);
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       };
-
-//       useEffect(() => {
-//         getCarDetails();
-//       },)
-
-//   return (
-//     <>
-//     <header className="sticky-top">
-//     <DefaultLayout />
-//   </header>
-
-//     <div className='profilemain'>
-//      <div className='profileleft'>
-
-//         <div className='leftsmall'>
-
-//        <Avatar className='avatarp' sx={{width:80,height:80}}/>
-
-//         </div>
-//       <div>
-//         <h4>NAME:{currentUser?.rest?.name}</h4><br />
-//         <h4>EMAIL:{currentUser?.rest?.email}</h4>
-//       </div>
-//     </div>
-
-//     <div className='profileright'>
-//         <div style={{padding:'2rem',color:'white'}}>
-//        <h4>SELECTED CAR:{car?.title}</h4>
-//        <h4>PRICE: { updatedPrice }</h4>
-//        </div>
-//     </div>
-
-//     </div>
-//     </>
-//   )
-// }
-
-// export default Profilepage
-
 import { Avatar } from "@mui/material";
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios';  // Import axios here
+import axios from "axios"; 
 import { TbCameraPlus } from "react-icons/tb";
 import { toast } from "react-toastify";
-import '../pages/Profilepage.css'
-import DefaultLayout from '../components/DefaultLayout';
+import "../pages/Profilepage.css";
+import DefaultLayout from "../components/DefaultLayout";
 
 function ProfilePage() {
   const fileRef = useRef(null);
   const [upload, setUpload] = useState(false);
   const dispatch = useDispatch();
+  const { currentBooking } = useSelector((state) => state.booking);
   const { currentUser } = useSelector((state) => state.user);
   const { updatedPrice } = useSelector((state) => state.price);
+  const { currentCarDetails } = useSelector((state) => state.booking);
+  const id = currentCarDetails;
+
+
   const [car, setCar] = useState({});
 
   const getCarDetails = async () => {
@@ -91,14 +34,16 @@ function ProfilePage() {
 
   useEffect(() => {
     getCarDetails();
-  }, []);
+  }, [currentBooking]);
 
   return (
     <div>
-      <header className='sticky-top'><DefaultLayout/></header>
+      <header className="sticky-top">
+        <DefaultLayout />
+      </header>
       <div className="personal-div">
         <h1 className="personal-h1">
-          <u>Personal Info</u>
+         
         </h1>
         <input
           type="file"
@@ -107,7 +52,7 @@ function ProfilePage() {
           hidden
           accept="image/*"
         />
-        <Avatar sx={{ width: 100, height: 100 }} src={currentUser?.image} />
+      
         <TbCameraPlus
           style={{
             fontSize: "1.5rem",
@@ -134,22 +79,32 @@ function ProfilePage() {
           </button>
         )}
       </div>
-      <div className="personal-sub-div">
-        <div className="personal-sub-div1">
-          <h5 style={{ fontWeight: "bold" }}>Full Name:</h5>
-          <p style={{ color: "blue",fontStyle:"italic" }}>{currentUser?.rest?.name}</p>
+      <div className="profilehead">
+      
+      <div className="profiemain">
+      <div className="profilename">
+     
+        <div className="profileinside">
+        <Avatar sx={{ width: 80, height: 80 }}/>
+        <h5>{currentUser?.rest?.name}</h5>
+        <h5>{currentUser?.rest?.email }</h5>
         </div>
-        <div className="personal-sub-div1">
-          <h5 style={{ fontWeight: "bold" }}>Email:</h5>
-          <p style={{ color: "blue",fontStyle:"italic" }}>{currentUser?.rest?.email}</p>
-        </div>
-        <div className="personal-sub-div1">
-          <h5 style={{ fontWeight: "bold" }}>price:</h5>
-          <p style={{ color: "blue",fontStyle:"italic" }}> { updatedPrice }</p>
-        </div>
+       <h4 style={{textAlign:'center'}}>MY ORDERS</h4>
+       <h5 style={{paddingLeft:'15px',paddingTop:'15px'}}>TOTAL AMOUNT: {updatedPrice}/-</h5>
+       <h5 style={{paddingLeft:'15px',paddingTop:'15px'}}>CAR DETAILS:  {car?.title} {car?.description}</h5>
+       <div class="scene">
+  <div className="cube">
+    <span class="side top">THANK YOU</span>
+    <span class="side front">LOGOUT</span>
+  </div>
+</div>
+      </div>
+      
+      </div>
+      
       </div>
     </div>
   );
 }
 
-export default  ProfilePage;
+export default ProfilePage;

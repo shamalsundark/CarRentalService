@@ -99,10 +99,11 @@ const ContactForm = () => {
                   </div>
                 </div>
                 <div>
-                  <label>Email Address:</label>
+                  <label style={{paddingTop:'10px'}}>Email
+                    <br /> Address:</label>
                   <input
                     style={{
-                      width: "42rem",
+                      width: "37rem",
                       color: isEmailHovered ? "green" : "black",
                     }}
                     type="email"
@@ -114,7 +115,7 @@ const ContactForm = () => {
                   />
                 </div>
 
-                <label>Message:</label>
+                <label style={{paddingTop:'5px'}}>Message:</label>
                 <div>
                   <textarea
                     style={{ width: "40rem", height: "9rem" }}
