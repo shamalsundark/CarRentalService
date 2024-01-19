@@ -9,16 +9,18 @@ import Typography from "@mui/material/Typography";
 import "../pages/paymentSection.css";
 import Footer from "./Footer";
 import Socialmedia from "./Socialmedia";
+import { useNavigate } from "react-router-dom";
 
 const PaymentSection = () => {
   const [car, setCar] = useState({});
+  const navigate = useNavigate()
  
   const { currentBooking } = useSelector((state) => state.booking);
   const { currentCarDetails } = useSelector((state) => state.booking);
   const { updatedPrice } = useSelector((state) => state.price);
   const { currentUser } = useSelector((state) => state.user);
   const id = currentCarDetails;
-
+ console.log(currentBooking,"hyy");
   const Razorpay = async(e)=>{
     e.preventDefault();  
     

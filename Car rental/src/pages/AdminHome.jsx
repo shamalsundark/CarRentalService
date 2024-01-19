@@ -20,12 +20,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const drawerWidth = 240;
@@ -94,12 +95,17 @@ export default function AdminHome() {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('persist:root');
+    window.location.reload();
    navigate('/login')
   }
  
   const handleContactUs = () => {
     navigate('/contactuss')
   }
+
+  const { currentAdmin } = useSelector((state) => state.admin);
+
   return (
    
       <><ThemeProvider theme={defaultTheme}>
@@ -212,7 +218,7 @@ export default function AdminHome() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Outlet/>
+          {currentAdmin ? <Outlet/> : <Navigate to = '/login'/>}
           </Container>
         </Box>
       </Box>

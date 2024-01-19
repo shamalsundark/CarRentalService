@@ -9,7 +9,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import logo from '../components/assests/logo.png';
 import { useSelector } from 'react-redux';
@@ -131,6 +130,7 @@ function ResponsiveAppBar({ userName }) {
             < PersonIcon style={{fontSize:"2rem"}} />
               {/* <Avatar alt={userName} src="/static/images/avatar/2.jpg" /> */}
             </IconButton>
+            {/* {currentUser?.rest?.name} */}
           </Tooltip>
           <Menu
             sx={{ mt: '45px' }}

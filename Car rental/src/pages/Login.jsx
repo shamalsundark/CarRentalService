@@ -24,6 +24,7 @@ import {
 } from "../redux/user/userSlice";
 
 import { GoogleLogin } from "@react-oauth/google";
+import { adminSiginSuccess } from "../redux/user/bookingDetails/adminSlice";
 
 const defaultTheme = createTheme();
 
@@ -86,10 +87,11 @@ export default function Login() {
         dispatch(siginSuccess(data));
         localStorage.setItem("token", data.data);
         navigate("/");
-    
+      
         toast.success(data.message);
       } else if (data.status === "adminsuccess") {
         localStorage.setItem("admin_token",data.data.jwt_token);
+        dispatch(adminSiginSuccess(data))
         navigate("/adminhome");
         toast.success(data.message);
 

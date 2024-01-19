@@ -37,6 +37,7 @@ import AdminCoupon from "./pages/AdminCoupon";
 import Deals from "./pages/Deals";
 import PopularBrands from "./pages/PopularBrands";
 import Tags from "./pages/Tags";
+import PrivateRoute from "./pages/PrivateRoute";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts.loading);
@@ -69,19 +70,26 @@ function App() {
           <Route path="/muv" element={<Muv />} />
           <Route path="/luxury" element={<Luxury />} />
           <Route path="/details/:id" element={<CarDetails />} />
-          <Route path="/finaldetails/:id" element={<FinalDetailss />} />
-          <Route path="/customerform" element={<CustomerDetailsForm />} />
+         
+         
           <Route path="/Otp/:email" element={<Otp />} />
           <Route path="/chat" element={<Chatbox />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/contactus" element={<ContactForm />} />
           <Route path="/forgot" element={<Forgotpassword />} />
           <Route path="/password_change" element={<PasswordChange />} />
-          <Route path="/payment" element={<PaymentSection />} />
+         
           <Route path="/profilepage" element={<Profilepage />} />
           <Route path="/deals" element={<Deals />} />
           <Route path="/popular" element={<PopularBrands />} />
           <Route path="/tags" element={<Tags />} />
+
+          <Route element = {<PrivateRoute/>}>
+          <Route path="/finaldetails/:id" element={<FinalDetailss />} />
+          <Route path="/customerform" element={<CustomerDetailsForm />} />
+          <Route path="/payment" element={<PaymentSection />} />
+          </Route>
+
           
 
           <Route path="/adminhome" element={<AdminHome />} />
