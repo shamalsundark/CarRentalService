@@ -38,6 +38,7 @@ import Deals from "./pages/Deals";
 import PopularBrands from "./pages/PopularBrands";
 import Tags from "./pages/Tags";
 import PrivateRoute from "./pages/PrivateRoute";
+import ElecrticCars from "./pages/ElectricCars";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts.loading);
@@ -69,6 +70,7 @@ function App() {
           <Route path="/suv" element={<Suv />} />
           <Route path="/muv" element={<Muv />} />
           <Route path="/luxury" element={<Luxury />} />
+          <Route path="/electric" element={<ElecrticCars />} />
           <Route path="/details/:id" element={<CarDetails />} />
          
          

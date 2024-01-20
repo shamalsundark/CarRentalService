@@ -103,9 +103,9 @@ function ResponsiveAppBar({ userName }) {
                       anchorEl={anchorElCar}
                       open={Boolean(anchorElCar)}
                       onClose={() => handleCloseCarMenu()}
-                      sx={{ marginTop: '40px' }}
+                      sx={{ marginTop: '30px' }}
                     >
-                      {['Sedan', 'Muv', 'Suv', 'Luxury'].map((type) => (
+                      {['Sedan', 'Muv', 'Suv', 'Luxury',"Electric"].map((type) => (
                         <MenuItem key={type} onClick={() => handleCloseCarMenu(type)}>
                           {type}
                         </MenuItem>

@@ -30,7 +30,7 @@ const Deals = () => {
 
   return (
     <div>
-      <h2>Orders..</h2>
+      <h2>Your All Booking Details</h2>
       <ul>
         {orders?.map(order => (
           <li key={order.userId}>

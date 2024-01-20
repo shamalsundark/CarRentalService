@@ -11,6 +11,8 @@ import Socialmedia from "./Socialmedia";
 import PopularBrands from "./PopularBrands"
 import Tags from "./Tags";
 
+
+
 function Home() {
   return (
     <div>
@@ -20,6 +22,7 @@ function Home() {
       <MediaCover />
       <CarRentalForm />
       <Discount />
+     
       <Featured />
       <PopularBrands/>
       <Vintage />
@@ -28,6 +31,7 @@ function Home() {
       <Whywor />
       <Footer />
       <Socialmedia />
+      
       
       
     </div>

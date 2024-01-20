@@ -4,49 +4,53 @@ import Card from 'react-bootstrap/Card';
 import DefaultLayout from '../components/DefaultLayout';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
-import '../pages/Sedan.css';
 import { useDispatch } from 'react-redux';
 import { bookedCarDetails } from '../redux/user/bookingDetails/bookingSlice';
+import { showLoading, hideLoading } from '../redux/alertSlice';
+import Socialmedia from './Socialmedia';
 
-function Sedan() {
+function Electric() {
   const [cars, setCars] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getAllCars() {
       try {
+        dispatch(showLoading());
         const response = await axios.get("http://localhost:5000/api/admin/cars");
         setCars(response.data.data);
+        dispatch(hideLoading());
       } catch (error) {
         console.error("Error fetching cars:", error);
+        dispatch(hideLoading());
       }
     }
 
     getAllCars();
-  }, []);
-  const dispatch = useDispatch()
+  }, [dispatch]);
+
+  const filterElectricCars = () => {
+    return cars.filter((car) => car.model === 'electric');
+  };
 
   const handleCarClick = (id) => {
-    dispatch( bookedCarDetails(id))
+    dispatch(bookedCarDetails(id));
     console.log(id);
     navigate(`/details/${id}`);
   };
 
-  const filterSedanCars = () => {
-    return cars.filter((car) => car.model === 'sedan');
-  };
-
-  const sedanCars = filterSedanCars();
+  const electricCars = filterElectricCars();
 
   return (
     <div>
       <header className='sticky-top'><DefaultLayout/></header>
       <div className='allcars'>
-        {sedanCars.map((car) => (
+        {electricCars.map((car) => (
           <Card key={car._id} style={{ width: '18rem', marginBottom: '20px' }}>
             <Card.Img variant="top" src={car.image} alt={car.title} />
             <Card.Body>
-              <Card.Title style={{ color: 'darkblue' }}>{car.title}</Card.Title>
+              <Card.Title style={{ color: 'darkgreen' }}>{car.title}</Card.Title>
               <Card.Text>{car.description}</Card.Text>
               <Card.Text>
                 PRICE: ₹{car.price}{' '}
@@ -60,16 +64,17 @@ function Sedan() {
                 CLICK
               </button>
             </Card.Body>
-          </Card>          
+          </Card>
         ))}
       </div>
       <div>
-        <div>
-          <Footer/>
-        </div>
+        <Footer/>
+      </div>
+      <div>
+        <Socialmedia />
       </div>
     </div>
   );
 }
 
-export default Sedan;
+export default Electric;
