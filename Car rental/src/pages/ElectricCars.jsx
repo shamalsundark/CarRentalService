@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Card from 'react-bootstrap/Card';
-import DefaultLayout from '../components/DefaultLayout';
-import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
-import { useDispatch } from 'react-redux';
-import { bookedCarDetails } from '../redux/user/bookingDetails/bookingSlice';
-import { showLoading, hideLoading } from '../redux/alertSlice';
-import Socialmedia from './Socialmedia';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "react-bootstrap/Card";
+import DefaultLayout from "../components/DefaultLayout";
+import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+import { useDispatch } from "react-redux";
+import { bookedCarDetails } from "../redux/user/bookingDetails/bookingSlice";
+import { showLoading, hideLoading } from "../redux/alertSlice";
+import Socialmedia from "./Socialmedia";
 
-function Electric() {
+function Electric({ showHeaderFooter = true }) {
   const [cars, setCars] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +18,9 @@ function Electric() {
     async function getAllCars() {
       try {
         dispatch(showLoading());
-        const response = await axios.get("http://localhost:5000/api/admin/cars");
+        const response = await axios.get(
+          "http://localhost:5000/api/admin/cars"
+        );
         setCars(response.data.data);
         dispatch(hideLoading());
       } catch (error) {
@@ -31,7 +33,7 @@ function Electric() {
   }, [dispatch]);
 
   const filterElectricCars = () => {
-    return cars.filter((car) => car.model === 'electric');
+    return cars.filter((car) => car.model === "electric");
   };
 
   const handleCarClick = (id) => {
@@ -44,35 +46,46 @@ function Electric() {
 
   return (
     <div>
-      <header className='sticky-top'><DefaultLayout/></header>
-      <div className='allcars'>
+       
+      {showHeaderFooter && (
+        <header className="sticky-top">
+          <DefaultLayout />
+        </header>
+      )}{" "}
+      <h4 style={{textAlign:'center',paddingTop:'2rem',color:'green'}}>EV CARS</h4>
+      <div className="allcars">
+       
         {electricCars.map((car) => (
-          <Card key={car._id} style={{ width: '18rem', marginBottom: '20px' }}>
+          <Card key={car._id} style={{ width: "18rem", marginBottom: "20px" }}>
             <Card.Img variant="top" src={car.image} alt={car.title} />
             <Card.Body>
-              <Card.Title style={{ color: 'darkgreen' }}>{car.title}</Card.Title>
+              <Card.Title style={{ color: "darkgreen" }}>
+                {car.title}
+              </Card.Title>
               <Card.Text>{car.description}</Card.Text>
               <Card.Text>
-                PRICE: ₹{car.price}{' '}
-                <span style={{ color: 'red' }}>ONWARDS</span>
+                PRICE: ₹{car.price}{" "}
+                <span style={{ color: "red" }}>ONWARDS</span>
               </Card.Text>
               <Card.Text>Model: {car.model}</Card.Text>
-              <button className='sedanbtn'
+              { showHeaderFooter && ( <button
+                className="sedanbtn"
                 variant="primary"
                 onClick={() => handleCarClick(car?._id)}
               >
                 CLICK
-              </button>
+              </button>)}
+             
             </Card.Body>
           </Card>
         ))}
       </div>
-      <div>
-        <Footer/>
-      </div>
-      <div>
-        <Socialmedia />
-      </div>
+      {showHeaderFooter && (
+        <>
+          <div><Footer/></div>
+          <div><Socialmedia /></div>
+        </>
+      )}
     </div>
   );
 }

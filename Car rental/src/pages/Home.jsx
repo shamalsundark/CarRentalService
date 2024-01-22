@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Socialmedia from "./Socialmedia";
 import PopularBrands from "./PopularBrands"
 import Tags from "./Tags";
+import ElectricCars from "./ElectricCars"
 
 
 
@@ -26,6 +27,7 @@ function Home() {
       <Featured />
       <PopularBrands/>
       <Vintage />
+      <ElectricCars  showHeaderFooter={false}/>
       <Map />
       <Tags />
       <Whywor />

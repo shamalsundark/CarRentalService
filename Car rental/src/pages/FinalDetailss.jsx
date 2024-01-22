@@ -97,8 +97,8 @@ const CarDetails = () => {
 
     return 0;
   };
-
   const dispatch = useDispatch();
+  // console.log(currentBooking,"sdss");
 
   const handleCheckboxChange = () => {
     setProceedWithoutProtection(!proceedWithoutProtection);
@@ -111,6 +111,8 @@ const CarDetails = () => {
   const handleEditClick = () => {
     navigate('/')
   }
+
+  
 
   const handleProtectionClick = (protectionType, amount) => {
     if (!proceedWithoutProtection) {
@@ -190,7 +192,18 @@ const CarDetails = () => {
   };
   const navigate = useNavigate();
   const handleNextButtonClick = () => {
-    navigate("/customerform");
+
+    // const { pickupLocation, dropOffLocation } = currentBooking?.detailsAdd;
+
+    
+    if (currentBooking) {
+      navigate("/customerform");
+    } else {
+     
+      alert("Please provide both 'From' and 'To' locations before proceeding.");
+      navigate("/")
+    }
+   
   };
 
   return (
