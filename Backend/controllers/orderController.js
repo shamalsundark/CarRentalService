@@ -20,6 +20,10 @@ const order = async (req, res) => {
 
     const orderAdded = await orderDetails.save();
     console.log(orderAdded);
+
+    return res.status(200).json({
+      status:"success",
+    })
   } catch (error) {
     console.error('Error saving order:', error.message);
   }

@@ -40,8 +40,8 @@ const Deals = () => {
           <li key={order.userId}>
             <h5>{order.userName}</h5><h5>{order.totalAmount}</h5> <br />
            <h5>Car Name:</h5> <h5>{order.carName}</h5><br />
-           <h5>Payment Id</h5><h5> {order.paymentId}</h5><br />
-             <h5>Date</h5><h5> {order.date}</h5>
+           <h5>Payment Id:</h5><h5> {order.paymentId}</h5><br />
+             <h5>Date</h5>:<h5> {order.date}</h5>
           </li>
           </div>
         ))}

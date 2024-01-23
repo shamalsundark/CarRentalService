@@ -8,10 +8,7 @@ import Container from "@mui/material/Container";
 import DefaultLayout from "../components/DefaultLayout";
 import Footer from "./Footer";
 import Socialmedia from "./Socialmedia";
-import "../pages/Carlist.css"
-
-
-
+import "../pages/Carlist.css";
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -29,16 +26,15 @@ function CarList() {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/cars");
+        const response = await axios.get(
+          "http://localhost:5000/api/admin/cars"
+        );
         const allCars = response.data.data;
 
-        // Shuffle all cars
         const shuffledCars = shuffleArray(allCars);
 
-        // Select the first 8 cars as the recommended cars
         const recommendedCarsSubset = shuffledCars.slice(0, 8);
 
-        // Exclude recommended cars from the most searched cars list
         const mostSearchedCarsSubset = shuffledCars.filter(
           (car) => !recommendedCarsSubset.some((rc) => rc._id === car._id)
         );
@@ -63,85 +59,84 @@ function CarList() {
   };
 
   return (
-    <div >
     <div>
-      <header className="sticky-top">
-        <DefaultLayout />
-      </header>
-      <div className="carlist">
-      <Container>
-        <h2
-          className="mt-4 mb-4"
-          style={{
-            color: "black",
-            fontFamily: "Arial, sans-serif",
-            fontSize: "2rem",
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            fontStyle: "italic",
-          }}
-        >
-          RECOMMENDED CARS
-        </h2>
-        <Slider {...settings}>
-          {recommendedCars.map((car) => (
-            <div
-              key={car._id}
-              style={{ margin: "1 10px", alignItems: "center", gap: "5px" }}
-            >
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={car.image} alt={car.title} />
-                <Card.Body>
-                  <Card.Title>{car.title}</Card.Title>
-                  <Card.Text>{car.description}</Card.Text>
-                  <Card.Text>PRICE: ₹{car.price}</Card.Text>
-                  <Card.Text>Model: {car.model}</Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
-          ))}
-        </Slider>
-      </Container>
-      </div>
       <div>
-      </div>
-      <div className="searched">
-        <Container>
-          <h2
-            className="mt-4 mb-4"
-            style={{
-              color: "black",
-              fontFamily: "Arial, sans-serif",
-              fontSize: "2rem",
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              fontStyle: "italic",
-            }}
-          >
-            MOST SEARCHED CARS
-          </h2>
-          <Slider {...settings}>
-            {mostSearchedCars.map((car) => (
-              <div
-                key={car._id}
-                style={{ margin: "1 10px", alignItems: "center", gap: "5px" }}
-              >
-                <Card style={{ width: "18rem" }}>
-                  <Card.Img variant="top" src={car.image} alt={car.title} />
-                  <Card.Body>
-                    <Card.Title>{car.title}</Card.Title>
-                    <Card.Text>{car.description}</Card.Text>
-                    <Card.Text>PRICE: ₹{car.price}</Card.Text>
-                    <Card.Text>Model: {car.model}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </div>
-            ))}
-          </Slider>
-        </Container>
+        <header className="sticky-top">
+          <DefaultLayout />
+        </header>
+        <div className="carlist">
+          <Container>
+            <h2
+              className="mt-4 mb-4"
+              style={{
+                color: "black",
+                fontFamily: "Arial, sans-serif",
+                fontSize: "2rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                fontStyle: "italic",
+              }}
+            >
+              RECOMMENDED CARS
+            </h2>
+            <Slider {...settings}>
+              {recommendedCars.map((car) => (
+                <div
+                  key={car._id}
+                  style={{ margin: "1 10px", alignItems: "center", gap: "5px" }}
+                >
+                  <Card style={{ width: "18rem" }}>
+                    <Card.Img variant="top" src={car.image} alt={car.title} />
+                    <Card.Body>
+                      <Card.Title>{car.title}</Card.Title>
+                      <Card.Text>{car.description}</Card.Text>
+                      <Card.Text>PRICE: ₹{car.price}</Card.Text>
+                      <Card.Text>Model: {car.model}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </Slider>
+          </Container>
+        </div>
+        <div></div>
+        <div className="searched">
+          <Container>
+            <h2
+              className="mt-4 mb-4"
+              style={{
+                color: "black",
+                fontFamily: "Arial, sans-serif",
+                fontSize: "2rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                fontStyle: "italic",
+              }}
+            >
+              MOST SEARCHED CARS
+            </h2>
+            <Slider {...settings}>
+              {mostSearchedCars.map((car) => (
+                <div
+                  key={car._id}
+                  style={{ margin: "1 10px", alignItems: "center", gap: "5px" }}
+                >
+                  <Card style={{ width: "18rem" }}>
+                    <Card.Img variant="top" src={car.image} alt={car.title} />
+                    <Card.Body>
+                      <Card.Title>{car.title}</Card.Title>
+                      <Card.Text>{car.description}</Card.Text>
+                      <Card.Text>PRICE: ₹{car.price}</Card.Text>
+                      <Card.Text>Model: {car.model}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </Slider>
+          </Container>
         </div>
       </div>
-      <Footer  />
+      <Footer />
       <Socialmedia />
     </div>
   );

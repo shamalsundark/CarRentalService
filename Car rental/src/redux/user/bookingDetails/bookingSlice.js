@@ -26,10 +26,14 @@ const bookingSlice = createSlice({
         },
         bookedCarDetails:(state,action)=>{
             state.currentCarDetails = action.payload
-        }
+        },
+        clearBooking: (state) => {
+            state.currentBooking = null;
+            state.currentCarDetails = null;
+          },
     }
 })
 
-export const {bookingStart,bookingSuccess,bookingFailure,bookedCarDetails}=bookingSlice.actions
+export const {bookingStart,bookingSuccess,bookingFailure,bookedCarDetails,  clearBooking}=bookingSlice.actions
 
 export default bookingSlice.reducer;
