@@ -15,9 +15,9 @@ const Socialmedia = () => {
       </div>
       <div className='icons'>
   <h5>
-    <i className="fab fa-facebook" style={{ marginRight: '10px' }}></i>
-    <i className="fab fa-twitter" style={{ marginRight: '10px' }}></i>
-    <i className="fab fa-instagram"></i>
+    <i  className="fab fa-facebook" style={{ marginRight: '10px',cursor:'pointer' }}></i>
+    <i className="fab fa-twitter" style={{ marginRight: '10px',cursor:'pointer' }}></i>
+    <i className="fab fa-instagram" style={{ marginRight: '10px',cursor:'pointer' }} ></i>
   </h5>
 </div>
 

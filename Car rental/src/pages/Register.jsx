@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DefaultLayout from "../components/DefaultLayout";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,7 +20,7 @@ export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const [userName,setUsername] = useState()
+
   console.log(formData,'form');
   const navigate=useNavigate();
   const handleChange = (e) => {
@@ -69,7 +68,7 @@ export default function Register() {
 
   return (
     <div>
-       {/* <header className='sticky-top'><DefaultLayout/></header> */}
+       
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
@@ -143,21 +142,6 @@ export default function Register() {
                 autoComplete="current-password"
                 onChange={handleChange}
               />
-              {/* <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="confirm password"
-                label="confirm Password"
-                type="password"
-                id="confirm password"
-                autoComplete="current-password"
-                onChange={handleChange}
-              /> */}
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
               {error && <Typography variant="body2" color="error">{error.message}</Typography>}
 
               <Button
