@@ -94,9 +94,9 @@ function CarRentalForm() {
   };
 
   return (
-    <div className="container mt-5">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
+    <div className="container contains mt-5 col-sm-12">
+      <form className='formeddata' onSubmit={handleSubmit}>
+        <div  className=" form-group">
           <label>Select Pickup Location</label>
           <select
             className="form-control"
@@ -236,7 +236,7 @@ function CarRentalForm() {
         <button className='newbtn'> SUBMIT
         </button>
       </form>
-      <img
+      <img className='imaging1'
         src="https://www.evmwheels.com/assets/img/evm.png"
         alt="Car Rental Image"
       />

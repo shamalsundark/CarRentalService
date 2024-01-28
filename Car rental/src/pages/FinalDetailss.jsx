@@ -387,8 +387,7 @@ const CarDetails = () => {
                   id="arrow"
                   stroke="none"
                   stroke-width="1"
-                  // fill="none"
-                  // fill-rule="evenodd"
+                  
                 >
                   <path
                     id="arrow-icon-one"

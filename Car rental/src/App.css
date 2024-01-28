@@ -1,7 +1,11 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Merienda:wght@500&display=swap');
 body{
   overflow-x: hidden;
 }
-
+.fonts{
+  font-family: "Merienda";
+}
 .homehead {
   text-align: center;
 }
@@ -167,7 +171,7 @@ h1 {
   padding-right: 30%;
   padding-top: 5%;
   height: 500px;
-  background-color:lightsteelblue;
+  background-color:#E1F0DA;
 }
 .car {
   margin-top: 20px;
@@ -552,3 +556,53 @@ border: none !important;
 .logo {
   padding-top: 20px; 
 }
+.stylish{
+  font-family: Kaushan Script !important;
+}
+.justed{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 300;
+  
+}
+
+
+
+
+@media screen and (max-width: 420px) {
+  .formeddata {
+    width: 90% !important;
+  }
+
+  .imaging1 {
+    display: none !important;
+  }
+
+  .vediosam {
+    display: none !important;
+  }
+
+  #typewriter {
+    font-size: 1.5rem;
+    width: 80%;
+  }
+  .container{
+    display: block;
+  }
+  .displaying {
+    display: flex;
+    flex-direction: column; /* Change flex direction to column for smaller screens */
+    
+  }
+
+  .square1,
+  .square2,
+  .square3 {
+    width: 100%;
+    margin-left: 92px; /* Set width to 100% for each square on smaller screens */
+    margin-bottom: 100px; /* Add margin between squares for spacing */
+  }
+  .containerr{
+    height: auto;
+  }
+}
+
