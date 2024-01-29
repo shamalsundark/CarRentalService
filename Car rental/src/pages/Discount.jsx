@@ -18,7 +18,7 @@ function Discount() {
     <div className="containerr ">
       <h2 className="heading2 col-sm-12">SPECIAL OFFERS AND DISCOUNTS</h2>
       <Slider {...settings}>
-        <div className="displaying">
+        {/* <div className="displaying"> */}
         <div className="square1 ">
           <div className="image-container">
             <img
@@ -64,7 +64,7 @@ function Discount() {
             </span>
           </div>
         </div>
-        </div>
+        {/* </div> */}
       </Slider>
     </div>
   );

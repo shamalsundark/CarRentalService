@@ -39,6 +39,7 @@ import PopularBrands from "./pages/PopularBrands";
 import Tags from "./pages/Tags";
 import PrivateRoute from "./pages/PrivateRoute";
 import ElecrticCars from "./pages/ElectricCars";
+import AdminCreateCar from "./pages/AdminCreateCar";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts.loading);
@@ -102,6 +103,7 @@ function App() {
             <Route path="/Adminedit/:carId" element={<AdminEdit />} />
             <Route path="/contactuss" element={<AdminContactUs />} />
             <Route path="/couponedit" element={<AdminCoupon />} />
+            <Route path="/createCars" element={<AdminCreateCar />} />
           </Route>
         </Routes>
       </BrowserRouter>

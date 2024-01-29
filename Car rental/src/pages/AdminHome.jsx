@@ -103,6 +103,9 @@ export default function AdminHome() {
   const handleContactUs = () => {
     navigate('/contactuss')
   }
+  const handleCreateCars = () => {
+    navigate('/createCars')
+  }
 
   const { currentAdmin } = useSelector((state) => state.admin);
 
@@ -180,12 +183,12 @@ export default function AdminHome() {
               </ListItemIcon>
               <ListItemText primary="Users" />
             </ListItemButton >
-            <ListItemButton >
+            <ListItemButton onClick={ handleCreateCars} >
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
-              <ListItemText primary="Blocked Users" />
-            </ListItemButton>
+              <ListItemText primary="Create Cars" />
+            </ListItemButton >
           </List>
           <Divider sx={{ my: 1 }} />
           <ListSubheader component="div" inset>
