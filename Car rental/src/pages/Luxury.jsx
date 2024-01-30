@@ -13,7 +13,7 @@ function Luxury() {
   const [cars, setCars] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch()
-
+console.log(cars,"sd");
 
   useEffect(() => {
     async function getAllCars() {

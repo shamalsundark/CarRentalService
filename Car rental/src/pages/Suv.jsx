@@ -34,7 +34,7 @@ function Suv() {
   };
 
   const filterSuvCars = () => {
-    return cars.filter((car) => car.model === 'suv');
+    return cars.filter((car) => car.model === ' suv');
   };
 
   const suvCars = filterSuvCars();

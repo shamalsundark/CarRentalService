@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import CircularIndeterminate from "../components/Spinner";
 import TerminalLoader from "../components/Spinner";
 
 const AdminCreateCar = () => {
@@ -9,11 +8,11 @@ const AdminCreateCar = () => {
     title: " ",
     description: " ",
     price: " ",
-    image: null,
+    image:null,
     model: " ",
     seat: " ",
     fuel: " ",
-    transmission: " ",
+    transmission:"",
   });
 
   const [loading, setLoading] = useState(false);

@@ -33,7 +33,7 @@ function Sedan() {
   };
 
   const filterSedanCars = () => {
-    return cars.filter((car) => car.model === 'sedan');
+    return cars.filter((car) => car.model === ' sedan');
   };
 
   const sedanCars = filterSedanCars();
