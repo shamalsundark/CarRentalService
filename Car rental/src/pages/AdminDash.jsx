@@ -43,10 +43,11 @@ const BasicCard = () => {
   }, []);
   const totalCars = carList.length;
 
-  const sedanCars = carList.filter((car) => car.model === "sedan");
-  const suvCars = carList.filter((car) => car.model === "suv");
-  const muvCars = carList.filter((car) => car.model === "muv");
-  const luxuryCars = carList.filter((car) => car.model === "luxury");
+  const sedanCars = carList.filter((car) => car.model === " sedan");
+  const suvCars = carList.filter((car) => car.model === " suv");
+  const muvCars = carList.filter((car) => car.model === " muv");
+  const luxuryCars = carList.filter((car) => car.model === " luxury");
+  const electricCars = carList.filter((car) => car.model === " luxury")
 
   return (
     <div>
@@ -137,11 +138,14 @@ const BasicCard = () => {
               <Typography sx={{ mb: 1.5 }} color="blue">
                 NO.OF.MUV: {muvCars.length}
               </Typography>
-              <Typography sx={{ mb: 1.5 }} color="green">
+              <Typography sx={{ mb: 1.5 }} color="dark pink">
                 NO.OF.SUV:{suvCars.length}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="brown">
                 NO.OF.LUXURY:{luxuryCars.length}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="green">
+                NO.OF.EV CARS:{electricCars.length}
               </Typography>
             </CardContent>
           </Card>

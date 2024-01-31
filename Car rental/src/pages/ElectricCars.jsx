@@ -33,7 +33,7 @@ function Electric({ showHeaderFooter = true }) {
   }, [dispatch]);
 
   const filterElectricCars = () => {
-    return cars.filter((car) => car.model === "electric");
+    return cars.filter((car) => car.model === " electric");
   };
 
   const handleCarClick = (id) => {
