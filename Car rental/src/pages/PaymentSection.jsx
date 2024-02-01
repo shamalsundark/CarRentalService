@@ -11,9 +11,15 @@ import Footer from "./Footer";
 import Socialmedia from "./Socialmedia";
 import { useNavigate } from "react-router-dom";
 import { clearBooking } from "../redux/user/bookingDetails/bookingSlice";
+import { yellow } from "@mui/material/colors";
 
 const PaymentSection = () => {
   const [car, setCar] = useState({});
+  const [coupen,setCoupen] = useState('')
+  const [grandTotal,setGrandTotal] = useState('');
+  const [coupenStatus,setCoupenStatus] = useState('');
+  const [status,setStatus] = useState('');
+
   const navigate = useNavigate();
 
   const { currentBooking } = useSelector((state) => state.booking);
@@ -22,6 +28,31 @@ const PaymentSection = () => {
   const { currentUser } = useSelector((state) => state.user);
   const id = currentCarDetails;
   const dispatch=useDispatch()
+  const userId =currentUser.rest._id
+
+  const handleSubmit =async(e)=>{
+    e.preventDefault()
+    const formData ={
+      coupen,
+      totalAmount,
+      userId
+    }
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/applycoupen',formData)
+      console.log(response);
+      if(response.data.success){
+         setStatus('coupen applied')
+         setGrandTotal(response?.data?.grandTotal)
+         setCoupenStatus(response?.data?.coupenstatus)
+      }else{
+        setStatus('coupen not valid')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+
+  }
 
   const Razorpay = async (e) => {
     e.preventDefault();
@@ -45,6 +76,8 @@ const PaymentSection = () => {
               currentBooking,
               currentCarDetails,
               updatedPrice,
+              grandTotal,
+              coupenStatus
             },
             {
               headers: {
@@ -206,6 +239,14 @@ const PaymentSection = () => {
             <h4 style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
               Diff Location Charge: ₹0.00
             </h4>
+            <form>
+          <div style={{display:"flex"}}>
+              <input type="text" placeholder="Enter Your Coupen Code" style={{ fontSize: "1.2rem", fontWeight: "bold" ,border:null}} onChange={(e)=>{setCoupen(e.target.value)}}/>
+                <button type="submit" onClick={handleSubmit}>Verify</button>
+                <p style={{color:yellow}}>{status}</p>
+              </div>
+              
+            </form>
             <h3
               style={{
                 fontSize: "1.5rem",

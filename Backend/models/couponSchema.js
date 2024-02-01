@@ -7,8 +7,9 @@ const couponSchema = new mongoose.Schema({
         required:true
     },
     discountType:{
-        enum:['percentage','fixed'],
-        required:true
+        type: String,
+        enum: ['percentage', 'fixed'], 
+        required: true
     },
     discountAmount:Number,
     expirationDate:Date

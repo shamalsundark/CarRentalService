@@ -21,6 +21,7 @@ require('dotenv').config();
       console.error('Error connecting to MongoDB:', error);
     });
 
+    
     app.use(express.json());
 
     app.use(ErrorHandler);
