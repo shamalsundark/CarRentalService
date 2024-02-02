@@ -52,7 +52,7 @@ export default function Login() {
       };
       if (formData) {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/googlelogin",
+          "https://carrental-h251.onrender.com/api/auth/googlelogin",
           formData
         );
 
@@ -77,7 +77,7 @@ export default function Login() {
     dispatch(signInStart());
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://carrental-h251.onrender.com/api/auth/login",
         formData
       );
       const data = await res.data;

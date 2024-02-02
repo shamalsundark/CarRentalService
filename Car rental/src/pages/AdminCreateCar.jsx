@@ -40,7 +40,7 @@ const AdminCreateCar = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admin/cars",
+        "https://carrental-h251.onrender.com/api/admin/cars",
         formData,
         {
           headers: {

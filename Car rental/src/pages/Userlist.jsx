@@ -53,7 +53,7 @@ export default function CustomizedTables() {
     async function fetchUsers() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/getuser"
+          "https://carrental-h251.onrender.com/api/admin/getuser"
         );
         setUserList(response.data);
       } catch (error) {
@@ -68,7 +68,7 @@ export default function CustomizedTables() {
     e.preventDefault();
     try {
       const block = await axios.put(
-        `http://localhost:5000/api/admin/users/${id}`,
+        `https://carrental-h251.onrender.com/api/admin/users/${id}`,
         { adminSuspended: true }
 
       );

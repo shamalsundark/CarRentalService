@@ -19,7 +19,7 @@ function Electric({ showHeaderFooter = true }) {
       try {
         dispatch(showLoading());
         const response = await axios.get(
-          "http://localhost:5000/api/admin/cars"
+          "https://carrental-h251.onrender.com/api/admin/cars"
         );
         setCars(response.data.data);
         dispatch(hideLoading());

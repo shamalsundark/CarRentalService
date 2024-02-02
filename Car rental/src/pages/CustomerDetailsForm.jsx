@@ -22,7 +22,7 @@ const UserForm = () => {
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/custdetails/cusdetails",
+        "https://carrental-h251.onrender.com/api/custdetails/cusdetails",
         formData
       );
       toast.success("Success");

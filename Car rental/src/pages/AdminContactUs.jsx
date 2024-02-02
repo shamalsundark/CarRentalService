@@ -24,7 +24,7 @@ const AdminContactUs = () => {
     async function getAllMessages() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/contactmessages"
+          "https://carrental-h251.onrender.com/api/admin/contactmessages"
         );
         setMessages(response.data);
       } catch (error) {

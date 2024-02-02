@@ -22,7 +22,7 @@ const ContactForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/contactus/contactuss",
+        "https://carrental-h251.onrender.com/api/contactus/contactuss",
         formData
       );
       toast.success("success");

@@ -9,7 +9,7 @@ const Forgotpassword = () => {
 
   const handleSubmit = async () => {   
     
-    const response = await axios.post("http://localhost:5000/api/auth/forgetpass",{email})
+    const response = await axios.post("https://carrental-h251.onrender.com/api/auth/forgetpass",{email})
     
 
     if (email === confirmEmail) {

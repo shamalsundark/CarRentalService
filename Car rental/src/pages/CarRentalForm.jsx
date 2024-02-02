@@ -78,7 +78,7 @@ function CarRentalForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/bookdetails",
+        "https://carrental-h251.onrender.com/api/auth/bookdetails",
         updatedFormData, 
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },

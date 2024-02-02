@@ -15,7 +15,7 @@ function Muv() {
   useEffect(() => {
     async function getAllCars() {
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/cars");
+        const response = await axios.get("https://carrental-h251.onrender.com/api/admin/cars");
         setCars(response.data.data);
       } catch (error) {
         console.error("Error fetching cars:", error);
@@ -27,7 +27,7 @@ function Muv() {
   const dispatch = useDispatch()
 
   const filterMuvCars = () => {
-    return cars.filter((car) => car.model === 'muv');
+    return cars.filter((car) => car.model === ' muv');
   };
 
   const handleCarClick = (id) => {

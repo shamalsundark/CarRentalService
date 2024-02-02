@@ -23,7 +23,7 @@ function ProfilePage() {
   const getCarDetails = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/auth/details`,
+        `https://carrental-h251.onrender.com/api/auth/details`,
         { id }
       );
       setCar(response.data.cars);

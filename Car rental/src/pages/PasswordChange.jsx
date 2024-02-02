@@ -14,7 +14,7 @@ const PasswordChange = () => {
 
     const passwordSubmit = async () => {
         console.log("submitted");
-        const response = await axios.post("http://localhost:5000/api/auth/changepassword",{password,queryValues})
+        const response = await axios.post("https://carrental-h251.onrender.com/api/auth/changepassword",{password,queryValues})
         navigate("/login")
     }
 

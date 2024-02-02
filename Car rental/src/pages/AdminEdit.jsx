@@ -20,7 +20,7 @@ const AdminEdit = () => {
 
       if (formData) {
         const response = await axios.post(
-          "http://localhost:5000/api/admin/editcar",
+          "https://carrental-h251.onrender.com/api/admin/editcar",
           formData
         );
 
@@ -45,7 +45,7 @@ const AdminEdit = () => {
 
       if (formData) {
         const response = await axios.post(
-          "http://localhost:5000/api/admin/editcardata",
+          "https://carrental-h251.onrender.com/api/admin/editcardata",
           formData
         )
         

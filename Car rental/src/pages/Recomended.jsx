@@ -8,7 +8,7 @@ const Recomended = () => {
   useEffect(() => {
     async function getRecomendedCars() {
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/cars");
+        const response = await axios.get("https://carrental-h251.onrender.com/api/admin/cars");
         const allCars = response.data.data;
 
         // Shuffle all cars

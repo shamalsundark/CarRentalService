@@ -44,7 +44,7 @@ function CarDetails() {
 
   const getCarDetails = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/auth/details`, { id });
+      const response = await axios.post(`https://carrental-h251.onrender.com/api/auth/details`, { id });
       setCar(response.data.cars);
     } catch (error) {
       console.log(error);

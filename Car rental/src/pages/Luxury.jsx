@@ -19,7 +19,7 @@ console.log(cars,"sd");
     async function getAllCars() {
       try {
         dispatch(showLoading())
-        const response = await axios.get("http://localhost:5000/api/admin/cars");
+        const response = await axios.get("https://carrental-h251.onrender.com/api/admin/cars");
         setCars(response.data.data);
         dispatch(hideLoading());
       } catch (error) {
@@ -32,7 +32,7 @@ console.log(cars,"sd");
   }, [dispatch]);
 
   const filterLuxuryCars = () => {
-    return cars.filter((car) => car.model === 'luxury');
+    return cars.filter((car) => car.model === ' luxury');
   };
 
   const handleCarClick = (id) => {

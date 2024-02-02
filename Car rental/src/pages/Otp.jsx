@@ -13,7 +13,7 @@ const MyForm = () => {
     try{
       const formData = {userInput,email}
       if(formData){
-        const response = await axios.post("http://localhost:5000/api/auth/otpcheck",formData)
+        const response = await axios.post("https://carrental-h251.onrender.com/api/auth/otpcheck",formData)
 
           if(response.data.success){
             navigate('/login')

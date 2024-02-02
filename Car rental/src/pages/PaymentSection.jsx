@@ -38,7 +38,7 @@ const PaymentSection = () => {
       userId
     }
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/applycoupen',formData)
+      const response = await axios.post('https://carrental-h251.onrender.com/api/auth/applycoupen',formData)
       console.log(response);
       if(response.data.success){
          setStatus('coupen applied')
@@ -68,7 +68,7 @@ const PaymentSection = () => {
         const { razorpay_payment_id: payment_id } = response;   
         if (response) {
           const updateStatus = axios.post(
-            "http://localhost:5000/api/admin/payments",
+            "https://carrental-h251.onrender.com/api/admin/payments",
             {
               payment_id,
               car,
@@ -119,7 +119,7 @@ const PaymentSection = () => {
   const getCarDetails = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/auth/details`,
+        `https://carrental-h251.onrender.com/api/auth/details`,
         { id }
       );
       setCar(response.data.cars);

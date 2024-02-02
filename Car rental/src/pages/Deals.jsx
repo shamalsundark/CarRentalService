@@ -12,7 +12,7 @@ const Deals = () => {
         
       
         const response = await axios.get(
-          "http://localhost:5000/api/admin/deals",
+          "https://carrental-h251.onrender.com/api/admin/deals",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),

@@ -14,7 +14,7 @@ const BasicCard = () => {
     async function fetchUsers() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/getuser"
+          "https://carrental-h251.onrender.com/api/admin/getuser"
         );
         setUserList(response.data);
       } catch (error) {
@@ -31,7 +31,7 @@ const BasicCard = () => {
     async function fetchCars() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/cars"
+          "https://carrental-h251.onrender.com/api/admin/cars"
         );
         setCarList(response.data.data);
       } catch (error) {
