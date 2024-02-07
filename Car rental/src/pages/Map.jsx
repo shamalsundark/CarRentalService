@@ -41,7 +41,6 @@ function Map() {
         </div>
         <div className='address'>
         <div style={{width:'500px',height:'80px'}} className='mx-auto max-w-screen-md'></div>
-
           <div id="lottie-container"></div>
           <h1 style={{color:'red',fontSize:'bold',marginBottom:'40px',textShadow:'inherit'}} className=''></h1>
         </div>
