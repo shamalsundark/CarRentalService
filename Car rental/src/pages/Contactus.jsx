@@ -20,6 +20,10 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!currentUser){
+      toast.error("You need to login send a message.")
+      return;
+    }
     try {
       const response = await axios.post(
         "https://carrental-h251.onrender.com/api/contactus/contactuss",
