@@ -15,8 +15,12 @@ const Deals = () => {
       try {
         
         if (!currentUser) {
-          setOrders([]);
-          return;
+          // Return JSX to render the image when currentUser is not available
+          return (
+            <div style={{ textAlign: "center" }}>
+              <img src="https://cdn.nostalgiaclassiccars.ae/sites/default/files/styles/rectangle/public/car/img_6100_0-2021-17-31-54.jpeg" alt="vw vintagecar" style={{ width: "300px", height: "200px" }} />
+            </div>
+          );
         }
       
         const response = await axios.get(
@@ -43,6 +47,12 @@ const Deals = () => {
         <DefaultLayout />
       </header>
       <h2 style={{textAlign:"center",fontWeight:'bold',color:'green'}}>Your All Booking Details</h2>
+      {orders.length === 0 && !currentUser && (
+        <div style={{ textAlign: "center" }}>
+          <h4>EMPTY BOOKING DETAILS</h4>
+          <img src="https://images.pexels.com/photos/16419608/pexels-photo-16419608/free-photo-of-a-nissan-frontier-drifting-in-a-mountain-valley.jpeg?auto=compress&cs=tinysrgb&w=600" alt="vw vintagecar" style={{ width: "1000px", height: "600px" }} />
+        </div>
+      )}
       <ul>
         <div style={{display:"flex",justifyContent:"space-around",flexWrap:"wrap",gap:"5rem"}}>
         {orders?.map(order => (
